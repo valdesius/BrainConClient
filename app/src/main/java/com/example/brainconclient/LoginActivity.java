@@ -33,17 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // REMOVE ACTION BAR:
-
-        // INITIALIZE REQUEST QUEUE:
-
-
-        // INITIATE / HOOK VIEW COMPONENTS:
         txt_email        = findViewById(R.id.txt_email);
         txt_password     = findViewById(R.id.txt_password);
         txtGoToSignIn   = findViewById(R.id.txt_go_to_sign_up);
         loginBtn        = findViewById(R.id.login_btn);
-        // GET LAYOUTS:
+
         txtEmailLayout      = findViewById(R.id.txt_email_layout);
         txtPasswordLayout   = findViewById(R.id.txt_password_layout);
 
@@ -54,11 +48,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    // END OF ON CREATE LOGIN ACTIVITY METHOD.
     public void goToMainIfAuthenticated(){
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
-        // DISPLAY SUCCESS MESSAGE IF AUTHENTICATED:
         Toast.makeText(LoginActivity.this, "Вход подтвержден", Toast.LENGTH_LONG).show();
         finish();
     }

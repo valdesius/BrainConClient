@@ -24,7 +24,6 @@ public class LoginValidationHelper implements TextWatcher {
         this.passwordFieldLayout = passwordFieldLayout;
         this.loginBtn = loginBtn;
     }
-    // END OF ALL ARGS CONSTRUCTOR.
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -48,15 +47,12 @@ public class LoginValidationHelper implements TextWatcher {
             emailFieldLayout.setError("Email cannot be empty");
         }
 
-// Check password field
         if (passwordField.isEmpty() || passwordField == null) {
             passwordFieldLayout.setError("Password cannot be empty");
         }
 
-// RE-ENABLE BUTTON IF ALL FIELDS ARE FILLED:
         loginBtn.setEnabled(!emailField.isEmpty() && !passwordField.isEmpty());
 
     }
-    // END OF ALL ARGS CONSTRUCTOR.
 
 }
