@@ -1,4 +1,4 @@
-package com.example.brainconclient.helper.validation;
+package com.example.brainconclient.helpers;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,13 +7,14 @@ import android.widget.Button;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginValidationHelper implements TextWatcher {
+public class LoginFormValidationHelper implements TextWatcher {
+
     private TextInputEditText emailTextField, passwordTextField;
     private TextInputLayout emailFieldLayout, passwordFieldLayout;
     private Button loginBtn;
     private String emailField, passwordField;
 
-    public LoginValidationHelper(TextInputEditText emailTextField,
+    public LoginFormValidationHelper(TextInputEditText emailTextField,
                                      TextInputEditText passwordTextField,
                                      TextInputLayout emailFieldLayout,
                                      TextInputLayout passwordFieldLayout,
@@ -43,16 +44,14 @@ public class LoginValidationHelper implements TextWatcher {
         emailFieldLayout.setError(null);
         passwordFieldLayout.setError(null);
 
-        if (emailField.isEmpty() || emailField == null) {
+        if (emailField.isEmpty() || emailField.isBlank()) {
             emailFieldLayout.setError("Email cannot be empty");
         }
 
-        if (passwordField.isEmpty() || passwordField == null) {
+        if (passwordField.isEmpty() || passwordField.isBlank()) {
             passwordFieldLayout.setError("Password cannot be empty");
         }
-
-        loginBtn.setEnabled(!emailField.isEmpty() && !passwordField.isEmpty());
-
+        loginBtn.setEnabled(!emailField.isBlank() && !passwordField.isBlank());
     }
 
 }

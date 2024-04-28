@@ -13,7 +13,18 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:text="BrainCon"
-        android:textSize="40sp" />
+        android:fontFamily=""
+        android:layout_marginBottom="10dp"
+        android:textSize="32sp"/>
+
+    <!-- Image: Splash Screen Logo -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="132dp"
+        app:srcCompat="@drawable/teacher" />
+    <!-- End Of Image: Splash Screen Logo -->
+
 </LinearLayout>
