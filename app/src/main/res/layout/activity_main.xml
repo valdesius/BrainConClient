@@ -4,66 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey"
+
+    android:background="#878787"
     android:orientation="vertical"
-    android:padding="15dp"
-    tools:context=".MainActivity">
+    tools:context=".SplashScreenActivity">
 
 
-    <!-- Display Logged In Username -->
-    <TextView
-        android:id="@+id/display_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/midnight_purple"
-        android:text=""
-        android:drawableStart="@drawable/baseline_person_outline_24"
-        android:background="@drawable/username_display_style"
-        android:elevation="20dp"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="20dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="22sp"/>
-    <!-- End Of Display Logged In Username -->
 
-    <!-- Progress Bar -->
-    <ProgressBar
-        android:id="@+id/get_not_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+    <!-- Image: Splash Screen Logo -->
+    <!-- End Of Image: Splash Screen Logo -->
 
-    <TextView
-        android:id="@+id/no_notes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/display_username"
-        android:text="No Notes to display"
-        android:textSize="22sp"
-        android:visibility="gone"
-        android:textFontWeight="700"/>
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="470dp"
+        android:layout_height="177dp"
 
-    <!-- Note List Recycler View -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/note_list_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/display_username"
-        android:visibility="gone"/>
-    <!-- End Of Note List Recycler View -->
+        android:layout_marginTop="-52sp"
+        app:srcCompat="@drawable/title" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_note_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/display_username"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="31dp"
-        android:clickable="true"
-        app:srcCompat="@drawable/baseline_add_24"/>
-    <!-- End Of Add Note Floating Action Button -->
+
+
+
+    <ImageView
+        android:id="@+id/course1"
+        android:layout_width="470dp"
+
+        android:layout_height="177dp"
+        android:layout_marginLeft="-150sp"
+        android:layout_marginTop="140sp"
+        app:srcCompat="@drawable/frame3" />
+
+    <ImageView
+        android:id="@+id/course2"
+        android:layout_marginTop="140sp"
+
+        android:layout_width="470dp"
+        android:layout_height="177dp"
+        android:layout_marginLeft="150sp"
+        app:srcCompat="@drawable/frame4" />
+
+    <ImageView
+        android:id="@+id/course3"
+        android:layout_marginTop="300sp"
+
+        android:layout_width="470dp"
+        android:layout_height="177dp"
+        android:layout_marginLeft="-150sp"
+        app:srcCompat="@drawable/frame5" />
+
+    <ImageView
+        android:id="@+id/course4"
+        android:layout_marginTop="300sp"
+
+        android:layout_width="470dp"
+        android:layout_height="177dp"
+        android:layout_marginLeft="150sp"
+        app:srcCompat="@drawable/frame6" />
+
 
 </RelativeLayout>
-

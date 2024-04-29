@@ -5,26 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#7CB2F2"
     android:orientation="vertical"
     tools:context=".SplashScreenActivity">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BrainCon"
-        android:fontFamily=""
-        android:layout_marginBottom="10dp"
-        android:textSize="32sp"/>
 
     <!-- Image: Splash Screen Logo -->
+    <!-- End Of Image: Splash Screen Logo -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="81dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="132dp"
+        android:layout_marginBottom="13dp"
         app:srcCompat="@drawable/teacher" />
-    <!-- End Of Image: Splash Screen Logo -->
+
+    <ImageView
+        android:id="@+id/braincontitile"
+        android:layout_width="wrap_content"
+
+        android:layout_height="52dp"
+        android:layout_marginBottom="132dp"
+        app:srcCompat="@drawable/braincontitle" />
+
 
 </LinearLayout>
