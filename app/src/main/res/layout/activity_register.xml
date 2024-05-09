@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="15dp"
     android:gravity="center"
-    android:background="#7CB2F2"
+    android:background="#1a1a1a"
     tools:context=".RegisterActivity">
 
     <ScrollView
@@ -24,13 +24,12 @@
             <!-- Register / Sign Up Heading -->
 
             <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="119dp"
-                android:layout_height="81dp"
-                android:layout_gravity="center_horizontal"
+                android:id="@+id/imageView1"
+                android:layout_width="285dp"
+                android:layout_height="221dp"
+                android:layout_gravity="center"
                 android:layout_marginBottom="13dp"
-                android:layout_marginTop="50sp"
-                app:srcCompat="@drawable/teacher" />
+                app:srcCompat="@drawable/splashfor" />
 
             <!-- First Name -->
             <TextView
@@ -49,8 +48,9 @@
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:counterEnabled="true"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 app:counterMaxLength="15"
+
                 app:counterTextAppearance="@color/error_color"
                 app:counterOverflowTextColor="@color/error_color"
                 app:startIconDrawable="@drawable/baseline_person_add_alt_24"
@@ -61,7 +61,7 @@
                     android:id="@+id/txt_first_name"
                     android:layout_width="match_parent"
                     android:maxLength="16"
-                    android:background="@color/white"
+                    android:background="@drawable/rounded_edittext_background"
 
                     android:maxLines="1"
                     android:layout_height="wrap_content"
@@ -89,7 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="16"
-                    android:background="@color/white"
+                    android:background="@drawable/rounded_edittext_background"
+
 
                     android:maxLines="1"
                     android:hint="Фамилия" />
@@ -112,7 +113,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:background="@color/white"
+                    android:background="@drawable/rounded_edittext_background"
+
 
                     android:hint="Email" />
 
@@ -123,15 +125,22 @@
 
                     <RadioButton
                         android:id="@+id/mentorRadioButton"
+                        android:button="@drawable/radio_button_selector"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:paddingLeft="10dp"
+                        android:textColor="@drawable/radio_button_text_color_selector"
                         android:text="Ментор" />
 
                     <RadioButton
+                        android:paddingLeft="10dp"
                         android:id="@+id/studentRadioButton"
+                        android:textColor="@drawable/radio_button_text_color_selector"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:button="@drawable/radio_button_selector"
                         android:text="Студент" />
                 </RadioGroup>
 
@@ -153,7 +162,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_password"
-                    android:background="@color/white"
+                    android:background="@drawable/rounded_edittext_background"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -175,7 +184,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:background="@color/white"
+                    android:background="@drawable/rounded_edittext_background"
                     android:id="@+id/txt_confirm"
                     android:layout_width="match_parent"
                     android:inputType="textPassword"
@@ -185,16 +194,16 @@
             <!-- End Of Confirm Password -->
 
             <!-- End Of User Registration Details Fields -->
-
             <!-- Register Action Button  -->
             <Button
                 android:id="@+id/register_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
+                android:backgroundTint="#1e90ff"
+                android:layout_marginTop="20dp"
                 android:enabled="false"
-                android:background="@color/white"
-                android:text="Создать аккаунт"/>
+                android:text="Создать аккаунт"
+                android:textColor="#FFFFFF"/>
             <!-- End Of Register Action Button  -->
 
             <!-- Re-Route To Sign In If User Has An Account -->
@@ -214,7 +223,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#044C8A"
+                    android:textColor="#1e90ff"
                     android:text="Вход"/>
             </LinearLayout>
             <!-- End Of Re-Route To Sign In If User Has An Account -->

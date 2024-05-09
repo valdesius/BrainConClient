@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#7CB2F2"
+    android:background="#1a1a1a"
     android:padding="15dp"
     tools:context=".LoginActivity">
 
@@ -19,15 +19,14 @@
         <!-- Sign In Heading -->
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="119dp"
-            android:layout_height="81dp"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/imageView1"
+            android:layout_width="298dp"
+            android:layout_height="234dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="13dp"
-            android:layout_marginTop="50sp"
-            app:srcCompat="@drawable/teacher" />
+            app:srcCompat="@drawable/splashfor" />
 
-            <TextView
+        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
@@ -43,23 +42,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
+            app:boxCollapsedPaddingTop="8dp"
             app:errorEnabled="true"
-
             app:errorTextAppearance="@color/error_color"
             app:startIconDrawable="@drawable/baseline_person_outline_24"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="100dp">
+            android:layout_marginTop="100dp"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_email"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                app:hintAnimationEnabled="false"
+                android:background="@drawable/rounded_edittext_background"
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_password_layout"
             android:layout_width="match_parent"
@@ -73,22 +72,24 @@
                 android:id="@+id/txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:inputType="textPassword"
-                android:hint="Пароль" />
+                android:background="@drawable/rounded_edittext_background"
+                android:hint="Пароль"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <!-- End Of User Sing In Fields -->
+
 
 
         <Button
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#1e90ff"
             android:layout_marginTop="20dp"
             android:enabled="false"
-
-            android:padding="15dp"
-            android:text="Войти" />
+            android:text="Войти"
+            android:textColor="#FFFFFF"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -106,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:textColor="#044C8A"
+                android:textColor="#1e90ff"
                 android:text="Регистрация"/>
 
         </LinearLayout>
