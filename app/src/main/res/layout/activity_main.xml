@@ -1,63 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container"
+    android:layout_above="@id/bottom_navigation"/>
 
-    android:background="#878787"
-    android:orientation="vertical"
-    tools:context=".SplashScreenActivity">
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/bottom_navigation"
+    android:layout_alignParentBottom="true"
+    app:menu="@menu/bottom_menu"
+    />
 
-
-
-    <!-- Image: Splash Screen Logo -->
-    <!-- End Of Image: Splash Screen Logo -->
-
-
-    <ImageView
-        android:id="@+id/header"
-        android:layout_width="470dp"
-        android:layout_height="177dp"
-
-        android:layout_marginTop="-52sp"
-        app:srcCompat="@drawable/title" />
-
-    <ImageView
-        android:id="@+id/course1"
-        android:layout_width="470dp"
-
-        android:layout_height="177dp"
-        android:layout_marginLeft="-150sp"
-        android:layout_marginTop="140sp"
-        app:srcCompat="@drawable/frame3" />
-
-    <ImageView
-        android:id="@+id/course2"
-        android:layout_marginTop="140sp"
-
-        android:layout_width="470dp"
-        android:layout_height="177dp"
-        android:layout_marginLeft="150sp"
-        app:srcCompat="@drawable/frame4" />
-
-    <ImageView
-        android:id="@+id/course3"
-        android:layout_marginTop="300sp"
-
-        android:layout_width="470dp"
-        android:layout_height="177dp"
-        android:layout_marginLeft="-150sp"
-        app:srcCompat="@drawable/frame5" />
-
-    <ImageView
-        android:id="@+id/course4"
-        android:layout_marginTop="300sp"
-
-        android:layout_width="470dp"
-        android:layout_height="177dp"
-        android:layout_marginLeft="150sp"
-        app:srcCompat="@drawable/frame6" />
 
 
 </RelativeLayout>

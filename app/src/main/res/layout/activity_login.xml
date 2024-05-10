@@ -45,7 +45,6 @@
             app:boxCollapsedPaddingTop="8dp"
             app:errorEnabled="true"
             app:errorTextAppearance="@color/error_color"
-            app:startIconDrawable="@drawable/baseline_person_outline_24"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="100dp"
             >
@@ -64,7 +63,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="password_toggle"
-            app:startIconDrawable="@drawable/baseline_lock_open_24"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="20dp">
 

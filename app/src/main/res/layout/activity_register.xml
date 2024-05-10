@@ -53,7 +53,6 @@
 
                 app:counterTextAppearance="@color/error_color"
                 app:counterOverflowTextColor="@color/error_color"
-                app:startIconDrawable="@drawable/baseline_person_add_alt_24"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content">
 
@@ -80,7 +79,7 @@
                 app:counterMaxLength="15"
                 app:counterTextAppearance="@color/error_color"
                 app:counterOverflowTextColor="@color/error_color"
-                app:startIconDrawable="@drawable/baseline_person_outline_24"
+
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content">
 
@@ -104,7 +103,6 @@
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:counterTextAppearance="@color/error_color"
-                app:startIconDrawable="@drawable/baseline_mail_outline_24"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content">
 
@@ -155,7 +153,6 @@
                 android:layout_width="match_parent"
                 app:errorEnabled="true"
                 app:counterTextAppearance="@color/error_color"
-                app:startIconDrawable="@drawable/baseline_lock_open_24"
                 app:endIconMode="password_toggle"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content">
@@ -178,7 +175,6 @@
                 app:errorEnabled="true"
 
                 app:counterTextAppearance="@color/error_color"
-                app:startIconDrawable="@drawable/baseline_lock_open_24"
                 app:endIconMode="password_toggle"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_height="wrap_content">

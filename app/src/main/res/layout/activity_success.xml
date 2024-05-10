@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#1f1f1f"
     android:gravity="center"
     android:padding="15dp"
     tools:context=".SuccessActivity">
@@ -13,16 +14,17 @@
     <ImageView
         android:layout_width="350dp"
         android:layout_height="300dp"
-        android:src="@drawable/success"/>
+
+        android:src="@drawable/splashfor"/>
 
     <!-- Success Text -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Success!"
+        android:text="Аккаунт создан!"
         android:textSize="35sp"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/tropical_green"
+        android:textColor="@color/white"
         android:textFontWeight="700"/>
 
     <!-- Return To Home Button -->
@@ -30,9 +32,10 @@
         android:id="@+id/success_return_home_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="20dp"
-        android:elevation="10dp"
-        android:text="Return Home"/>
+        android:backgroundTint="#1e90ff"
+        android:layout_marginTop="20dp"
+        android:text="Вернуться к входу"
+        android:textColor="#FFFFFF"/>
 
 
 </LinearLayout>
