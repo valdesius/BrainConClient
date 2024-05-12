@@ -53,7 +53,7 @@
 
                 app:counterTextAppearance="@color/error_color"
                 app:counterOverflowTextColor="@color/error_color"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/NoUnderlineTextInputLayout"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -80,7 +80,7 @@
                 app:counterTextAppearance="@color/error_color"
                 app:counterOverflowTextColor="@color/error_color"
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/NoUnderlineTextInputLayout"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -103,7 +103,7 @@
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:counterTextAppearance="@color/error_color"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/NoUnderlineTextInputLayout"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -154,7 +154,7 @@
                 app:errorEnabled="true"
                 app:counterTextAppearance="@color/error_color"
                 app:endIconMode="password_toggle"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/NoUnderlineTextInputLayout"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -176,7 +176,7 @@
 
                 app:counterTextAppearance="@color/error_color"
                 app:endIconMode="password_toggle"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/NoUnderlineTextInputLayout"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText

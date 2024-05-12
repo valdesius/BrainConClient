@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1a1a1a"
-    tools:context=".HomeFragment">
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search Fragment"
-        android:textSize="25dp"
-        android:layout_centerInParent="true"/>
+    <EditText
+        android:background="@drawable/rounded_search"
+        android:id="@+id/search_field"
+        style="@style/Widget.AppCompat.EditText"
 
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:hint="Поиск курсов"
+
+        android:inputType="text"
+        android:textColor="@color/white"
+
+
+        android:paddingLeft="14dp"
+        android:layout_marginTop="16dp"
+         />
+
+    <!-- Дополнительный контент и элементы списка могут быть добавлены здесь -->
 
 </RelativeLayout>

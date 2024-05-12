@@ -1,16 +1,325 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
+    <!-- TextView "Рекомендации" -->
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:textSize="25dp"
-        android:layout_centerInParent="true"/>
+        android:layout_marginVertical="10dp"
+        android:layout_marginLeft="30dp"
+        android:text="Рекомендации"
+        android:textColor="#FFFFFF"
+        android:textFontWeight="700"
+        android:textSize="35sp" />
 
+    <!-- FrameLayout с изображениями и текстом -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="150dp"
+        android:layout_height="138dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_rectangle">
+
+        <!-- RelativeLayout для позиционирования изображений и текста -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- ImageView "python" -->
+            <ImageView
+                android:id="@+id/image_left"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_margin="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/python" />
+
+            <!-- ImageView "heart" -->
+            <ImageView
+                android:id="@+id/image_right"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/image_left"
+                android:scaleType="centerCrop"
+                android:src="@drawable/heart" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/image_left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_toEndOf="@id/image_right"
+            android:text="Python"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_look_btn"
+            android:backgroundTint="#1C1C1C"
+            android:textColor="@color/white"
+            android:text="Перейти"
+
+            android:textAllCaps="false"/>
+
+    </FrameLayout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="150dp"
+        android:layout_height="138dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_rectangle">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/swifticon"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/swift" />
+            <ImageView
+                android:id="@+id/image_righttt"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/swifticon"
+                android:scaleType="centerCrop"
+                android:src="@drawable/heart" />
+
+
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:text="Swift"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_look_btn"
+            android:backgroundTint="#1C1C1C"
+            android:textColor="@color/white"
+            android:text="Перейти"
+
+            android:textAllCaps="false"/>
+    </FrameLayout>
+
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="150dp"
+        android:layout_height="138dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/rounded_rectangle">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/jsicon"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/javascript" />
+        <ImageView
+
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/jsicon"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hearred" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:text="JavaScript"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_look_btn"
+            android:backgroundTint="#1C1C1C"
+            android:textColor="@color/white"
+            android:text="Перейти"
+            android:textAllCaps="false"/>
+
+
+    </FrameLayout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="150dp"
+        android:layout_height="138dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/rounded_rectangle">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/cssicon"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cssfile" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:text="CSS"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/image_left"
+            android:scaleType="centerCrop"
+            android:src="@drawable/heart" />
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_look_btn"
+            android:backgroundTint="#1C1C1C"
+            android:textColor="@color/white"
+            android:text="Перейти"
+            android:textAllCaps="false"/>
+    </FrameLayout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="150dp"
+        android:layout_height="138dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/rounded_rectangle">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/htmllanguage" />
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/image_left"
+            android:scaleType="centerCrop"
+            android:src="@drawable/heart" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:text="HTML"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_look_btn"
+            android:backgroundTint="#1C1C1C"
+            android:textColor="@color/white"
+            android:text="Перейти"
+
+            android:textAllCaps="false"/>
+    </FrameLayout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="150dp"
+        android:layout_height="138dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/rounded_rectangle">
+
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/java" />
+        <ImageView
+            android:id="@+id/image_rightt"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/image_left"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hearred" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="45dp"
+            android:text="Java"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_look_btn"
+            android:backgroundTint="#1C1C1C"
+            android:textColor="@color/white"
+            android:text="Перейти"
+
+            android:textAllCaps="false"/>
+    </FrameLayout>
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button_html"
+        android:layout_width="380dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/rounded_rectangle"
+        android:layout_marginTop="700dp"
+
+
+        android:textAllCaps="false"
+
+        android:drawablePadding="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="Все курсы"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center_vertical|center_horizontal" />
 
 </RelativeLayout>
