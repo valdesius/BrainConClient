@@ -1,5 +1,6 @@
 package com.example.brainconclient;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -91,7 +92,11 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser();
+                try {
+                    registerUser();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
         });
@@ -109,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    public void registerUser() {
+    public void registerUser() throws JSONException {
 
         String first_name = txtRegFirstName.getText().toString();
         String last_name = txtRegLastName.getText().toString();
@@ -151,7 +156,12 @@ public class RegisterActivity extends AppCompatActivity {
                 });
 
         requestQueue.add(jsonObjectRequest);
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        // Сохраняем роль пользователя
+        myEdit.putString("role", jsonRequest.getString("role"));
+        myEdit.apply();
     }
-    // END OF REGISTER USER METHOD.
 
 }

@@ -2,11 +2,16 @@ package com.example.brainconclient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
+    private SharedPreferences prefs;
+    private boolean isLoggedIn;
 
     BottomNavigationView bottomNavigationView;
 
@@ -18,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        prefs = getSharedPreferences("YourPrefsName", Context.MODE_PRIVATE);
+        isLoggedIn = prefs.getBoolean("isLoggedIn", false);
+
+        if (!isLoggedIn) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("isLoggedIn", true);
+        editor.apply();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 

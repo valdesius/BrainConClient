@@ -105,6 +105,13 @@
                 android:layout_marginLeft="10dp"
                 android:textColor="#1e90ff"
                 android:text="Регистрация"/>
+            <TextView
+                android:id="@+id/txt_go_to_guest"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:textColor="#1e90ff"
+                android:text="Войти как гость"/>
 
         </LinearLayout>
 

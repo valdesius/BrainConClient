@@ -135,9 +135,12 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.has("token")) {
                         editor.putString("token", response.getString("token"));
                     }
+
+                    if (response.has("role")) {
+                        editor.putString("role", response.getString("role"));
+                    }
                     editor.putBoolean("authenticated", true);
                     editor.apply();
-
 
                     goToMainIfAuthenticated();
                 } catch (JSONException e) {
@@ -146,8 +149,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     throw new RuntimeException(e);
                 }
-
             }
+
 
         }, new Response.ErrorListener() {
             @Override
@@ -160,7 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failed To Log-In", Toast.LENGTH_LONG).show();
             }
         });
-
 
         mRequestQueue.add(request);
     }
