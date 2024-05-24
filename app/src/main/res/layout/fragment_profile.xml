@@ -11,6 +11,17 @@
         android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
         android:src="@drawable/user" />
+    <Button
+        android:id="@+id/change_av_button"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/change_profile_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#1e90ff"
+        android:text="Изменить аватарку"
+        android:textAllCaps="false"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/user_name"
@@ -20,9 +31,24 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Влад"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txt_prof_first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avatar_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Влад"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
+
+
+
 
     <Button
         android:id="@+id/change_profile_button"
@@ -44,7 +70,7 @@
         android:layout_height="90dp"
         android:layout_below="@+id/change_profile_button"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/rounded_rectangle">
 
 

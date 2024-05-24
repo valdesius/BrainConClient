@@ -2,209 +2,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1f1f1f"
     tools:context=".HomeFragment">
-
-    <ScrollView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_courses_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/baseline_add_24" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/display_username"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:text=""-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-            <!-- TextView "Рекомендации" -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:gravity="center"
-                android:text="Рекомендации"
-                android:textColor="#FFFFFF"
-                android:textFontWeight="700"
-                android:textSize="35sp" />
+    <!--        android:layout_marginLeft="130dp"-->
+    <!--        android:elevation="20dp"-->
+    <!--        android:paddingHorizontal="15dp"-->
+    <!--        android:paddingVertical="20dp"-->
+    <!--        android:textSize="36sp"/>-->
+    <!-- TextView "Рекомендации" -->
+    <!--    <TextView-->
+    <!--        android:id="@+id/hello"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:text="Привет, "-->
+    <!--        android:elevation="20dp"-->
 
-            <!-- FrameLayout с изображениями и текстом -->
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="150dp"
-                android:layout_height="138dp"
-                android:layout_centerHorizontal="true"
+    <!--        android:paddingHorizontal="5dp"-->
+    <!--        android:paddingVertical="20dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
 
-                android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_rectangle">
+    <!--        android:textSize="36sp"/>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/note_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-                <!-- RelativeLayout для позиционирования изображений и текста -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+        android:visibility="gone"/>
 
-                    <!-- ImageView "python" -->
-                    <ImageView
-                        android:id="@+id/image_left"
-                        android:layout_width="33dp"
-                        android:layout_height="33dp"
-                        android:layout_margin="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/python" />
+    <TextView
+        android:id="@+id/no_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#4A4949"
+        android:text="В данный момент курсы отсутствуют"
+        android:layout_marginLeft="5dp"
+        android:elevation="20dp"
 
-                    <!-- ImageView "heart" -->
-                    <ImageView
-                        android:id="@+id/image_right"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@id/image_left"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/heart" />
+        android:gravity="center"
+        android:visibility="invisible"
+        android:layout_centerVertical="true"
+        android:textFontWeight="700"
+        android:paddingHorizontal="15dp"
 
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/image_left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_toEndOf="@id/image_right"
-                    android:text="Python"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/rounded_look_btn"
-                    android:backgroundTint="#1C1C1C"
-                    android:text="Перейти"
-                    android:textAllCaps="false"
-
-                    android:textColor="@color/white" />
-
-            </FrameLayout>
-
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="150dp"
-                android:layout_height="138dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="28sp"/>
 
 
-                android:background="@drawable/rounded_rectangle">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/jsicon"
-                        android:layout_width="33dp"
-                        android:layout_height="33dp"
-                        android:layout_margin="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/javascript" />
-
-                    <ImageView
-
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@id/jsicon"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/hearred" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="50dp"
-                    android:text="JavaScript"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/rounded_look_btn"
-                    android:backgroundTint="#1C1C1C"
-                    android:text="Перейти"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+    <!-- Display Logged In Username -->
 
 
-            </FrameLayout>
 
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="150dp"
-                android:layout_height="138dp"
-                android:layout_centerHorizontal="true"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+    </LinearLayout>
 
-                android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_rectangle">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="33dp"
-                        android:layout_height="33dp"
-                        android:layout_margin="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/htmllanguage" />
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginLeft="100dp"
-                        android:layout_marginTop="10dp"
-
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/heart" />
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="50dp"
-                    android:text="HTML"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/rounded_look_btn"
-                    android:backgroundTint="#1C1C1C"
-                    android:text="Перейти"
-                    android:textAllCaps="false"
-
-                    android:textColor="@color/white" />
-            </FrameLayout>
-
-
-            <Button
-                android:id="@+id/button_html"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_rectangle"
-                android:text="Все курсы"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>

@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     //private static final String USER_DETAIL_PREF = "USER_INFO";
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
 
     private LoginFormValidationHelper loginValidator;
-    private TextView txtGoToSignIn;
+    private TextView  txtGoToSignIn;
 
     private TextInputEditText txt_email, txt_password;
     private TextInputLayout txtEmailLayout, txtPasswordLayout;
@@ -48,66 +49,67 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        } else {
+        // REMOVE ACTION BAR:
+        getSupportActionBar().hide();
 
-        }
-
-
+        // INITIALIZE REQUEST QUEUE:
         mRequestQueue = MyVolleySingletonUtil.getInstance(LoginActivity.this).getRequestQueue();
 
 
-        txt_email = findViewById(R.id.txt_email);
-        txt_password = findViewById(R.id.txt_password);
-        txtGoToSignIn = findViewById(R.id.txt_go_to_sign_up);
-        loginBtn = findViewById(R.id.login_btn);
+        // INITIATE / HOOK VIEW COMPONENTS:
+        txt_email        = findViewById(R.id.txt_email);
+        txt_password     = findViewById(R.id.txt_password);
+        txtGoToSignIn   = findViewById(R.id.txt_go_to_sign_up);
+        loginBtn        = findViewById(R.id.login_btn);
+        // GET LAYOUTS:
+        txtEmailLayout      = findViewById(R.id.txt_email_layout);
+        txtPasswordLayout   = findViewById(R.id.txt_password_layout);
 
-        txtEmailLayout = findViewById(R.id.txt_email_layout);
-        txtPasswordLayout = findViewById(R.id.txt_password_layout);
-
-
+        // GET FORM VALIDATOR OBJECT:
         loginValidator = new LoginFormValidationHelper(txt_email, txt_password, txtEmailLayout, txtPasswordLayout, loginBtn);
 
-
+        // ADD TEXT FIELD LISTENERS:
         txt_email.addTextChangedListener(loginValidator);
         txt_password.addTextChangedListener(loginValidator);
 
-
+        // PROCESS LOGIN:
         processLogin();
 
+        // REDIRECT TO REGISTER ACTIVITY:
         redirectToRegister();
 
     }
+    // END OF ON CREATE LOGIN ACTIVITY METHOD.
 
 
-    public void processLogin() {
+    public void processLogin(){
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 authenticateUser(txt_email.getText().toString(), txt_password.getText().toString());
                 // Toast.makeText(LoginActivity.this, "Login Button Clicked!", Toast.LENGTH_SHORT).show();
             }
+            // END OF ONCLICK METHOD.
         });
-
+        // END OF ON LOGIN CLICK LISTENER METHOD.
     }
+    // END OF PROCESS LOGIN ACTION BUTTON.
 
-
-    public void redirectToRegister() {
+    public void redirectToRegister(){
         txtGoToSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToRegister();
             }
-
+            // END OF ON CLICK METHOD.
         });
-
+        // END OF GO TO REGISTER ON CLICK LISTENER METHOD.
     }
+    // END OF REDIRECT TO REGISTER PAGE ACTION METHOD.
 
-    public void authenticateUser(String email, String password) {
+    public void authenticateUser(String email, String password){
 
-
+        // SET USER DATA MAP OBJECT:
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("email", email);
         params.put("password", password);
@@ -117,41 +119,31 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
+                // INITIATE PREFERENCES:
                 preferences = getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 try {
-                    if (response.has("userId")) {
-                        editor.putInt("user_id", response.getInt("userId"));
-                    }
-                    if (response.has("firstName")) {
-                        editor.putString("first_name", response.getString("firstName"));
-                    }
-                    if (response.has("lastName")) {
-                        editor.putString("last_name", response.getString("lastName"));
-                    }
-                    if (response.has("username")) {
-                        editor.putString("username", response.getString("username"));
-                    }
-                    if (response.has("token")) {
-                        editor.putString("token", response.getString("token"));
-                    }
 
-                    if (response.has("role")) {
-                        editor.putString("role", response.getString("role"));
-                    }
+                    editor.putInt("user_id", response.getInt("userId"));
+                    editor.putString("first_name", response.getString("firstName"));
+                    editor.putString("last_name", response.getString("lastName"));
+                    editor.putString("username", response.getString("username"));
+                    editor.putString("token", response.getString("token"));
                     editor.putBoolean("authenticated", true);
                     editor.apply();
-
+                    // REDIRECT TO MAIN IF AUTHENTICATED:
                     goToMainIfAuthenticated();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    System.out.println("Error in try block: " + e.getMessage());
-                    Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    System.out.println("Error msg 1 try block: " + e.getMessage());
+                    System.out.println("Error msg 2: " + "In try block");
+                    Toast.makeText(LoginActivity.this, "Try Block error:" + e.getMessage(), Toast.LENGTH_LONG).show();
                     throw new RuntimeException(e);
                 }
+                // END OF JSON RESPONSE OBJECT TRY BLOCK.
             }
-
-
+            // END OF ON RESPONSE METHOD.
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -163,23 +155,28 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failed To Log-In", Toast.LENGTH_LONG).show();
             }
         });
+        // END OF JSON OBJECT REQUEST OBJECT.
 
+        // ADD TO REQUEST QUE:
         mRequestQueue.add(request);
     }
+    // END OF AUTHENTICATED USER METHOD.
 
-
-    public void goToRegister() {
+    public void goToRegister(){
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
         finish();
     }
+    // END OF GO TO REGISTER ACTIVITY.
 
-
-    public void goToMainIfAuthenticated() {
+    public void goToMainIfAuthenticated(){
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        // DISPLAY SUCCESS MESSAGE IF AUTHENTICATED:
         Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
         finish();
     }
+    // END OF GO TO LOGIN INTENT METHOD.
 
 }
+// END OF LOGIN ACTIVITY CLASS.

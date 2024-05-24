@@ -27,9 +27,8 @@ public class RegistrationFormValidatorHelper implements TextWatcher {
                                            TextInputLayout txtRegEmailLayout,
                                            TextInputLayout txtRegPassLayout,
                                            TextInputLayout txtRegConfirmLayout,
-                                           Button registerBtn,
-                                           RadioButton studentRadioButton,
-                                           RadioButton mentorRadioButton) {
+                                           Button registerBtn
+                                           ) {
         this.txtRegFirstName = txtRegFirstName;
         this.txtRegLastName = txtRegLastName;
         this.txtRegEmail = txtRegEmail;
