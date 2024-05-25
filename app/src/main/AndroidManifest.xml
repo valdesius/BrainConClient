@@ -10,7 +10,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/user"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/user"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNotes"
         android:usesCleartextTraffic="true"
@@ -23,7 +23,15 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".TestDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".CreateCourseActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CreateTestActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity

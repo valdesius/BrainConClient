@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 // Создаем значок уведомления (badge) для пункта меню "Поиск"
         BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.search);
-        badgeDrawable.setVisible(true);
-        badgeDrawable.setNumber(8);
+
+
 
 // Обработчик выбора пунктов нижнего навигационного меню
         bottomNavigationView.setOnItemSelectedListener(item -> {

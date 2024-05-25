@@ -5,6 +5,10 @@
         android:icon="@drawable/baseline_home_24"
         android:title="Главная" />
     <item
+        android:id="@+id/fav"
+        android:icon="@drawable/hearred"
+        android:title="Избранное" />
+    <item
         android:id="@+id/search"
         android:icon="@drawable/baseline_search_24"
         android:title="Поиск" />

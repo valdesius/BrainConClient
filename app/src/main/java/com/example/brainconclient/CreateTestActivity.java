@@ -1,6 +1,6 @@
 package com.example.brainconclient;
 
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,38 +27,37 @@ import com.example.brainconclient.utils.MyVolleySingletonUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateCourseActivity extends AppCompatActivity {
-
+public class CreateTestActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private RequestQueue requestQueue;
 
     private SharedPreferences preferences;
-    private TextView createNoteTitleField, createNoteBodyField;
-    private Button createNoteBtn;
+    private TextView createTestTitleField, createTestBodyField;
+    private Button createTestBtn;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_course);
+        setContentView(R.layout.activity_create_test);
         // SET ACTION BAR ATTRIBUTES:
 
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("Создать курс");
+
         preferences = getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
 
         // HOOK / INITIATE VIEW ELEMENTS / COMPONENTS:
-        createNoteTitleField    = findViewById(R.id.create_note_title_field);
-        createNoteBodyField     = findViewById(R.id.create_note_body_field);
-        createNoteBtn           = findViewById(R.id.create_note_btn);
+        createTestTitleField    = findViewById(R.id.create_test_title_field);
+        createTestBodyField     = findViewById(R.id.create_test_body_field);
+        createTestBtn           = findViewById(R.id.create_test_btn);
 
         // INITIATE REQUEST QUE:
-        requestQueue = MyVolleySingletonUtil.getInstance(CreateCourseActivity.this).getRequestQueue();
+        requestQueue = MyVolleySingletonUtil.getInstance(CreateTestActivity.this).getRequestQueue();
 
-        createNoteBtn.setOnClickListener(new View.OnClickListener() {
+        createTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // CREATE NOTE METHOD:
-                createNote();
+                createTest();
             }
         });
         // END OF CREATE NOTE ON CLICK LISTENER OBJECT.
@@ -66,22 +65,22 @@ public class CreateCourseActivity extends AppCompatActivity {
     }
     // END OF ON CREATE METHOD.
 
-    public void createNote(){
-        String title = createNoteTitleField.getText().toString();
-        String body = createNoteBodyField.getText().toString();
+    public void createTest(){
+        String title = createTestTitleField.getText().toString();
+        String body = createTestBodyField.getText().toString();
 
-        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.createNoteApiUri(), new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.createTestApiUri(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("CreateCourseActivity", "Created Course!");
-                Toast.makeText(CreateCourseActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                Log.i("CreateTestActivity", "Created test!");
+                Toast.makeText(CreateTestActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.i("CreateCourseActivity", "Ошибка в создании курса");
-                Toast.makeText(CreateCourseActivity.this, "Failed to create note", Toast.LENGTH_LONG).show();
+                Log.i("CreateTestActivity", "Ошибка в создании теста");
+                Toast.makeText(CreateTestActivity.this, "Failed to create test", Toast.LENGTH_LONG).show();
             }
             // END OF ON ERROR RESPONSE METHOD.
         }){
@@ -113,10 +112,8 @@ public class CreateCourseActivity extends AppCompatActivity {
     // END OF CREATE NOTE METHOD.
 
     public void goToSuccessActivity(){
-        Intent goToSuccess = new Intent(CreateCourseActivity.this, SuccessActivity.class);
+        Intent goToSuccess = new Intent(CreateTestActivity.this, SuccessActivity.class);
         startActivity(goToSuccess);
         finish();
     }
-    // END OF GO TO SUCCESS ACTIVITY METHOD.
 }
-// END OF CREATE NOTE ACTIVITY CLASS.

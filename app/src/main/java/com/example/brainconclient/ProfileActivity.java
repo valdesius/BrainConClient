@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         // ACTION BAR SETUP:
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Profile");
+        actionBar.setTitle("Изменение данных");
 
         // HOOK / INITIATE VIEW ELEMENTS:
         txtProfFirstName        = findViewById(R.id.txt_prof_first_name);

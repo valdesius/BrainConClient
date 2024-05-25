@@ -7,7 +7,7 @@
 
     <!-- Main Note Content Wrapper -->
     <LinearLayout
-        android:id="@+id/noteItemLayout"
+        android:id="@+id/testItemLayout"
         android:layout_width="match_parent"
         android:layout_height="138dp"
         android:orientation="horizontal"
@@ -32,13 +32,12 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:fontFamily="@font/globersemiboldfree"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="right"
-                android:src="@drawable/heart"/>
+                android:src="@drawable/check"/>
 
             <TextView
-                android:id="@+id/note_title"
+                android:id="@+id/test_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
@@ -46,15 +45,15 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/globersemiboldfree"
                 android:textColor="@color/white"
-                android:text="Название курса"/>
+                android:text="Название теста"/>
             <TextView
-                android:id="@+id/note_body"
+                android:id="@+id/test_body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/globersemiboldfree"
                 android:textColor="@color/white"
 
-                android:text="Описание курса"
+                android:text="Описание теста"
 
                 android:textSize="18sp"/>
 

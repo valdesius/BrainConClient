@@ -27,6 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/globersemiboldfree"
             android:layout_marginVertical="10dp"
             android:textAlignment="center"
             android:textSize="40sp"
@@ -44,7 +45,7 @@
             app:errorEnabled="true"
             android:elevation="0dp"
             app:boxStrokeWidth="0dp"
-            android:layout_marginTop="100dp"
+            android:paddingTop="20dp"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,8 +84,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#1e90ff"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/globersemiboldfree"
             android:enabled="false"
             android:text="Войти"
+            android:textAllCaps="false"
             android:textColor="#FFFFFF"/>
 
         <LinearLayout
@@ -96,6 +99,7 @@
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/globersemiboldfree"
                 android:text="Еще нет аккаунта?"/>
 
             <TextView
@@ -104,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:textColor="#1e90ff"
+                android:fontFamily="@font/globersemiboldfree"
                 android:text="Регистрация"/>
             <TextView
                 android:id="@+id/txt_go_to_guest"
@@ -111,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="90dp"
                 android:textColor="#1e90ff"
+                android:fontFamily="@font/globersemiboldfree"
                 android:text="Войти как гость"/>
 
         </LinearLayout>

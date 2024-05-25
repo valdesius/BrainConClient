@@ -29,5 +29,20 @@ public class ApiLinksHelper {
     // END OF DELETE NOTE API URI METHOD.
 
 
+    public static String getMyTestsApiUri(){
+        return BASE_URL + "test/my_tests";
+    }
+    // END OF GET MY NOTES API URI METHOD.
+
+    public static String createTestApiUri(){
+        return BASE_URL + "test/create";
+    }
+    // END OF CREATE NOTES API URI METHOD.
+
+    public static String deleteTestApiUri(){
+        return BASE_URL + "test/delete";
+    }
+
+
 
 }
