@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment = new HomeFragment();
     SearchFragment searchFragment = new SearchFragment();
     ProfileFragment profileFragment = new ProfileFragment();
+    FavoriteFragment favoriteFragment = new FavoriteFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
                 return true;
             }
+            else if (itemId == R.id.fav) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, favoriteFragment).commit();
+                return true;}
             return false;
         });
     }

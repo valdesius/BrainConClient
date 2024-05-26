@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,7 @@ public class CourseDetailActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Test> testList;
 
+
     private RequestQueue requestQueue;
     private TextView deleteNoteBtn;
 
@@ -85,12 +87,20 @@ createTestFloatingActionButton();
 getUserTests();
 
         createTestBtn = findViewById(R.id.create_test_btn);
+        noteDtlTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=  new Intent(CourseDetailActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // DELETE NOTE ON CLICK LISTENER OBJECT:
         deleteNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("NoteDetailActivity", "note id is: " + noteId);
+                Log.i("CourseDetailActivity", "test id is: " + noteId);
                 deleteNote(noteId);
             }
             // END OF ON CLICK METHOD.
@@ -103,7 +113,7 @@ getUserTests();
         StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteNoteApiUri(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("NoteDetailActivity","Noted Deleted Successfully!");
+                Log.i("NoteDetailActivity","Course Deleted Successfully!");
                 Toast.makeText(CourseDetailActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(CourseDetailActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -115,8 +125,8 @@ getUserTests();
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.i("NoteDetailActivity", "Failed to delete note with id of: " + note_Id);
-                Toast.makeText(CourseDetailActivity.this, "Failed to delete note", Toast.LENGTH_LONG).show();
+                Log.i("CourseDetailActivity", "Failed to delete course with id of: " + note_Id);
+                Toast.makeText(CourseDetailActivity.this, "Failed to delete course", Toast.LENGTH_LONG).show();
             }
             // END OF ON ERROR RESPONSE METHOD.
         }){

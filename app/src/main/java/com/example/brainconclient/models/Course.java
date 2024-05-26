@@ -1,6 +1,15 @@
 package com.example.brainconclient.models;
 
 public class Course {
+    private boolean isFavorite;
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
 
     private int course_id;
     private String title;

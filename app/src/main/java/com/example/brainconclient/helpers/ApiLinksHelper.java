@@ -44,5 +44,14 @@ public class ApiLinksHelper {
     }
 
 
+    public static String getFavorites() {
+        return BASE_URL + "note/favorites";
+    }
+
+
+    public static String updateFavorite(int noteId, boolean newStatus) {
+        return BASE_URL + "note/favorite";
+    }
+
 
 }

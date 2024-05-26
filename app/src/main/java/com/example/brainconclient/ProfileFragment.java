@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -83,19 +84,21 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    public void logUserOut() {
-        clearPreferences();
+    public void logUserOut(){
+        clearAuthenticationPreferences();
         goToLogin();
+        Toast.makeText(getActivity(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
     }
 
-    public void clearPreferences() {
+    public void clearAuthenticationPreferences(){
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("isLoggedIn", false); // Update the login status
+        editor.remove("token"); // Удаляем только токен аутентификации
         editor.apply();
     }
+    // END OF LOGOUT OR CLEAR PREFERENCES.
 
-    public void goToLogin() {
-        Intent intent = new Intent(getContext(), LoginActivity.class);
+    public void goToLogin(){
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

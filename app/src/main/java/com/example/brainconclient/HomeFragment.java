@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
     private RequestQueue mRequestQueue;
     private RecyclerView.Adapter adapter;
     private List<Course> courseList;
+    private List<Course> favoriteCourseList;
     private RecyclerView recyclerView;
     private FloatingActionButton createCourseBtn;
     SharedPreferences preferences;
@@ -91,6 +92,8 @@ public class HomeFragment extends Fragment {
             public void onResponse(JSONArray response) {
 //                progressBar.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
+
+                filterFavoriteCourses(response);
 
                 for (int i = 0; i < response.length(); i++) {
 
@@ -156,6 +159,33 @@ public class HomeFragment extends Fragment {
     public void goToCreateNoteActivity() {
         Intent goToCreateNote = new Intent(getActivity(), CreateCourseActivity.class);
         startActivity(goToCreateNote);
+    }
+    private void filterFavoriteCourses(JSONArray courses) {
+        favoriteCourseList = new ArrayList<>();
+        for (int i = 0; i < courses.length(); i++) {
+            try {
+                JSONObject courseObject = courses.getJSONObject(i);
+                boolean isFavorite = courseObject.getBoolean("is_favorite"); // Предполагаем, что у вас есть такой флаг
+                if (isFavorite) {
+                    Course course = new Course(
+                            courseObject.getInt("note_id"),
+                            courseObject.getString("title"),
+                            courseObject.getString("body")
+                    );
+                    favoriteCourseList.add(course);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        updateUIWithFavorites();
+    }
+
+    // Метод для обновления UI избранными курсами
+    private void updateUIWithFavorites() {
+        adapter = new CourseListRecyclerViewHelper(favoriteCourseList, getActivity());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 
