@@ -1,25 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <EditText
-        android:background="@drawable/rounded_search"
-        android:id="@+id/search_field"
-        style="@style/Widget.AppCompat.EditText"
-
+        android:id="@+id/search_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:hint="Поиск курсов"
+        android:layout_height="wrap_content"
+        android:hint="Введите курс"
+    android:inputType="text"
+    android:padding="16dp"
+    android:layout_margin="8dp"/>
 
-        android:inputType="text"
-        android:textColor="#c1c1c1"
-
-
-        android:paddingLeft="14dp"
-        android:layout_marginTop="16dp"
-         />
-
-    <!-- Дополнительный контент и элементы списка могут быть добавлены здесь -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_results_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_edit_text"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>
