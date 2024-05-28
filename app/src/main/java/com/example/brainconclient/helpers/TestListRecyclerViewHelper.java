@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brainconclient.CourseDetailActivity;
 import com.example.brainconclient.R;
+import com.example.brainconclient.TestDetailActivity;
 import com.example.brainconclient.models.Test;
 
 import java.util.List;
@@ -40,23 +41,20 @@ public class TestListRecyclerViewHelper extends RecyclerView.Adapter<TestListRec
     public void onBindViewHolder(@NonNull TestListRecyclerViewHelper.TestListViewHolder holder, int position) {
         Test test = this.testListItems.get(position);
 
-//        holder.noteId.setText(String.valueOf(note.getNote_id()));
         holder.testTitle.setText(test.getTitle());
         holder.testBody.setText(test.getBody());
-
 
         holder.testItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toast.makeText(context, "You clicked: " + note.getNote_id(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, CourseDetailActivity.class);
+                Intent intent = new Intent(context, TestDetailActivity.class);
                 intent.putExtra("test_id", String.valueOf(test.getTest_id()));
-                intent.putExtra("test_tile", test.getTitle());
+                intent.putExtra("test_title", test.getTitle());
                 intent.putExtra("test_body", test.getBody());
+                intent.putExtra("test_question", test.getQuestion());
                 context.startActivity(intent);
             }
         });
-
     }
     // END OF ON BIND VIEW HOLDER METHOD.
 
@@ -67,7 +65,7 @@ public class TestListRecyclerViewHelper extends RecyclerView.Adapter<TestListRec
     // END OF GET COUNT ITEM METHOD.
 
     public class TestListViewHolder extends RecyclerView.ViewHolder {
-        public TextView testId, testTitle, testBody;
+        public TextView testId, testTitle, testBody, testQuestion;
         private LinearLayout testItemLayout;
 
         public TestListViewHolder(@NonNull View itemView) {
@@ -76,6 +74,7 @@ public class TestListRecyclerViewHelper extends RecyclerView.Adapter<TestListRec
             testTitle = itemView.findViewById(R.id.test_title);
             testBody = itemView.findViewById(R.id.test_body);
             testItemLayout = itemView.findViewById(R.id.testItemLayout);
+
         }
         // END OF NOTE LIST VIEW HOLDER CONSTRUCTOR.
     }

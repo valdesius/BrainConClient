@@ -165,15 +165,12 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < courses.length(); i++) {
             try {
                 JSONObject courseObject = courses.getJSONObject(i);
-                boolean isFavorite = courseObject.getBoolean("is_favorite"); // Предполагаем, что у вас есть такой флаг
-                if (isFavorite) {
-                    Course course = new Course(
-                            courseObject.getInt("note_id"),
-                            courseObject.getString("title"),
-                            courseObject.getString("body")
-                    );
-                    favoriteCourseList.add(course);
-                }
+                Course course = new Course(
+                        courseObject.getInt("note_id"),
+                        courseObject.getString("title"),
+                        courseObject.getString("body")
+                );
+                favoriteCourseList.add(course);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

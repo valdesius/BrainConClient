@@ -75,7 +75,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
         holder.noteItemLayout.setOnClickListener(v -> {
             Intent intent = new Intent(context, CourseDetailActivity.class);
             intent.putExtra("note_id", String.valueOf(course.getNote_id()));
-            intent.putExtra("note_tile", course.getTitle());
+            intent.putExtra("note_title", course.getTitle());
             intent.putExtra("note_body", course.getBody());
             context.startActivity(intent);
         });
@@ -93,9 +93,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
     }
 
     private void updateFavoriteStatusOnServer(int noteId, boolean newStatus) {
-        // Здесь должен быть ваш код для отправки запроса на API
-        // Используйте ApiLinksHelper.updateFavorite() для получения URL
-        String url = ApiLinksHelper.updateFavorite(noteId, newStatus); // Предположим, что URL зависит от noteId и newStatus
+        String url = ApiLinksHelper.updateFavorite(noteId, newStatus); // URL должен включать user_id
 
         StringRequest request = new StringRequest(Request.Method.PUT, url, response -> {
             // Обработка успешного ответа сервера
@@ -105,19 +103,23 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
             // Обработка ошибки
             error.printStackTrace();
             Log.i("CourseListRecyclerViewHelper", "Ошибка при обновлении статуса избранного");
-            Toast.makeText(context, "Failed to update favorite status", Toast.LENGTH_LONG).show();
         }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("note_id", String.valueOf(noteId));
-                params.put("is_favorite", newStatus ? "1" : "0"); // Предполагаем, что сервер ожидает 1 для true и 0 для false
+                params.put("is_favorite", newStatus ? "1" : "0");
+                params.put("user_id", String.valueOf(preferences.getInt("user_id", -1))); // Добавьте user_id в параметры
                 return params;
             }
 
             @Override
-            public Map<String, String> getHeaders() {
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                // Убедитесь, что preferences не null
+                if (preferences == null) {
+                    throw new IllegalStateException("SharedPreferences not initialized");
+                }
                 String token = preferences.getString("token", "");
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + token);

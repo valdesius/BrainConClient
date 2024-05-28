@@ -74,7 +74,7 @@ public class CourseDetailActivity extends AppCompatActivity {
 
         // GET INTEND DATA:
         String noteId   = getIntent().getStringExtra("note_id");
-        String noteTitle = getIntent().getStringExtra("note_tile");
+        String noteTitle = getIntent().getStringExtra("note_title");
         String noteBody = getIntent().getStringExtra("note_body");
         mRequestQueue = MyVolleySingletonUtil.getInstance(CourseDetailActivity.this).getRequestQueue();
 
@@ -113,7 +113,7 @@ getUserTests();
         StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteNoteApiUri(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("NoteDetailActivity","Course Deleted Successfully!");
+                Log.i("CourseDetailActivity","Course Deleted Successfully!");
                 Toast.makeText(CourseDetailActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(CourseDetailActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -173,7 +173,8 @@ getUserTests();
                         Test test
                                 = new Test(responseObject.getInt("test_id"),
                                 responseObject.getString("title"),
-                                responseObject.getString("body"));
+                                responseObject.getString("body"),
+                                responseObject.getString("question"));
                         testList.add(test);
 
                     } catch (JSONException e) {

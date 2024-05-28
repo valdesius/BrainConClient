@@ -61,8 +61,30 @@
             android:background="@drawable/rounded_edittext_background"
             android:hint="Email"/>
     </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_prof_email_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_prof_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext_background"
+            android:hint="Пароль"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-
+    <Button
+        android:id="@+id/profile_update_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить"
+        android:fontFamily="@font/globersemiboldfree"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:backgroundTint="#1e90ff"
+        android:layout_marginTop="30dp"
+        android:paddingVertical="18dp"/>
     <Button
         android:id="@+id/profile_logout_btn"
         android:layout_width="match_parent"

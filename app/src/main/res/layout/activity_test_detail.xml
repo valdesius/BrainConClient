@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="20dp"
-        android:gravity=""
         android:paddingHorizontal="10dp"
         android:background="@drawable/course_list__bg_style"
 
@@ -22,7 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:visibility="invisible"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="43sp"
@@ -36,6 +34,38 @@
             android:text=""
             android:textColor="@color/white"
             android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/test_dtl_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textSize="23sp"
+            android:text=""
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/answer_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите ответ"
+            android:background="@drawable/rounded_edittextser_background"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="#c1c1c1"
+            android:padding="16dp"
+            />
+        <Button
+            android:id="@+id/submit_answer_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1e90ff"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:enabled="false"
+            android:text="Подтвердить"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
     <!-- End Of Note Detail Wrapper -->
 
@@ -50,5 +80,7 @@
 
         android:textSize="18sp"
         android:textColor="#C34040" />
+
+
 
 </RelativeLayout>

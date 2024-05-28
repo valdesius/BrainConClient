@@ -81,7 +81,7 @@ public class CreateCourseActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Log.i("CreateCourseActivity", "Ошибка в создании курса");
-                Toast.makeText(CreateCourseActivity.this, "Failed to create note", Toast.LENGTH_LONG).show();
+
             }
             // END OF ON ERROR RESPONSE METHOD.
         }){

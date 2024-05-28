@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class TestDetailActivity extends AppCompatActivity {
 
-    private TextView testDtlTitle,  testDtlBody;
+    private TextView testDtlTitle,  testDtlBody, testDtlQuestion;
     private SharedPreferences preferences;
 
     private RequestQueue requestQueue;
@@ -48,16 +48,19 @@ public class TestDetailActivity extends AppCompatActivity {
         // HOOK / INITIATE VIEW ELEMENTS / COMPONENTS:
         testDtlTitle    = findViewById(R.id.test_dtl_title);
         testDtlBody     = findViewById(R.id.test_dtl_body);
+        testDtlQuestion = findViewById(R.id.test_dtl_question);
         deleteTestBtn   = findViewById(R.id.delete_test_btn);
 
         // GET INTEND DATA:
         String testId   = getIntent().getStringExtra("test_id");
-        String testTitle = getIntent().getStringExtra("test_tile");
+        String testTitle = getIntent().getStringExtra("test_title");
         String testBody = getIntent().getStringExtra("test_body");
+        String testQuestion = getIntent().getStringExtra("test_question");
 
         // SET VALUES TO VIEW COMPONENTS:
         testDtlTitle.setText(testTitle);
         testDtlBody.setText(testBody);
+        testDtlQuestion.setText(testQuestion);
 
         // DELETE NOTE ON CLICK LISTENER OBJECT:
         deleteTestBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +76,7 @@ public class TestDetailActivity extends AppCompatActivity {
     // END OF ON CREATE METHOD.
 
     public void deleteTest(String test_Id){
-        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteNoteApiUri(), new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteTestApiUri(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("TestDetailActivity","Test Deleted Successfully!");
@@ -117,11 +120,7 @@ public class TestDetailActivity extends AppCompatActivity {
     }
     // END OF DELETE NOTE METHOD.
 
-    public void goToSuccessActivity(){
-        Intent goToSuccess = new Intent(TestDetailActivity.this, SuccessActivity.class);
-        startActivity(goToSuccess);
-        finish();
-    }
+
     // END OF GO TO SUCCESS ACTIVITY METHOD.
 
 }

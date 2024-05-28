@@ -6,6 +6,9 @@ public class ApiLinksHelper {
     public static String authUserApiUri(){
         return BASE_URL + "auth/authenticate";
     }
+    public static String updateUserApiUri(){
+        return BASE_URL + "auth/updateUser";
+    }
     // END OF AUTHENTICATE USER API URI METHOD.
 
     public static  String registerUserApiUri(){
@@ -52,6 +55,18 @@ public class ApiLinksHelper {
     public static String updateFavorite(int noteId, boolean newStatus) {
         return BASE_URL + "note/favorite";
     }
+
+
+    public static String createQuestionApiUri(){
+        return BASE_URL + "questions/create";
+    }
+    // END OF CREATE NOTES API URI METHOD.
+
+    public static String deleteQuestionApiUri(){
+        return BASE_URL + "questions/delete";
+    }
+    // END OF DELETE NOTE API URI METHOD.
+
 
 
 }

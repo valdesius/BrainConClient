@@ -4,11 +4,21 @@ public class Test {
     private int test_id;
     private String title;
     private String body;
+    private String question;
 
-    public Test(int test_id, String title, String body) {
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public Test(int test_id, String title, String body, String question) {
         this.test_id = test_id;
         this.title = title;
         this.body = body;
+        this.question = question;
     }
 
     public Test(String title, String body){

@@ -28,11 +28,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateTestActivity extends AppCompatActivity {
-    private ActionBar actionBar;
     private RequestQueue requestQueue;
 
     private SharedPreferences preferences;
-    private TextView createTestTitleField, createTestBodyField;
+    private TextView createTestTitleField, createTestBodyField, createTestQuestionField, createTestAnswerField;
     private Button createTestBtn;
 
     @SuppressLint("MissingInflatedId")
@@ -48,6 +47,8 @@ public class CreateTestActivity extends AppCompatActivity {
         // HOOK / INITIATE VIEW ELEMENTS / COMPONENTS:
         createTestTitleField    = findViewById(R.id.create_test_title_field);
         createTestBodyField     = findViewById(R.id.create_test_body_field);
+        createTestQuestionField     = findViewById(R.id.create_test_question_field);
+        createTestAnswerField = findViewById(R.id.create_test_answer_field);
         createTestBtn           = findViewById(R.id.create_test_btn);
 
         // INITIATE REQUEST QUE:
@@ -68,6 +69,8 @@ public class CreateTestActivity extends AppCompatActivity {
     public void createTest(){
         String title = createTestTitleField.getText().toString();
         String body = createTestBodyField.getText().toString();
+        String question = createTestQuestionField.getText().toString();
+        String answer = createTestAnswerField.getText().toString();
 
         StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.createTestApiUri(), new Response.Listener<String>() {
             @Override
@@ -90,6 +93,8 @@ public class CreateTestActivity extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<String, String>();
                 params.put("title", title);
                 params.put("body", body);
+                params.put("question", question);
+                params.put("answer", answer);
                 return params;
             }
             // END OF GET PARAMS METHOD.
@@ -111,9 +116,4 @@ public class CreateTestActivity extends AppCompatActivity {
     }
     // END OF CREATE NOTE METHOD.
 
-    public void goToSuccessActivity(){
-        Intent goToSuccess = new Intent(CreateTestActivity.this, SuccessActivity.class);
-        startActivity(goToSuccess);
-        finish();
-    }
 }
