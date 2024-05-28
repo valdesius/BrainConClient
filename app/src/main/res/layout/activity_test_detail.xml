@@ -62,7 +62,6 @@
             android:backgroundTint="#1e90ff"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/globersemiboldfree"
-            android:enabled="false"
             android:text="Подтвердить"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"/>

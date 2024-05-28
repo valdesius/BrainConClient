@@ -108,10 +108,15 @@ public class CreateTestActivity extends AppCompatActivity {
             }
             // END OF GET HEADERS METHOD.
         };
+
         // END OF STRING REQUEST OBJECT.
 
         // ADD / SEND REQUEST:
         requestQueue.add(request);
+
+        Intent intent = new Intent(CreateTestActivity.this, TestDetailActivity.class);
+        intent.putExtra("correct_answer", answer);
+        startActivity(intent);
 
     }
     // END OF CREATE NOTE METHOD.

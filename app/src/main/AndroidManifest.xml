@@ -19,6 +19,9 @@
             android:name=".SuccessActivity"
             android:exported="false" />
         <activity
+            android:name=".SuccessTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".CourseDetailActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />

@@ -5,6 +5,15 @@ public class Test {
     private String title;
     private String body;
     private String question;
+    private String answer;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     public String getQuestion() {
         return question;
@@ -14,11 +23,12 @@ public class Test {
         this.question = question;
     }
 
-    public Test(int test_id, String title, String body, String question) {
+    public Test(int test_id, String title, String body, String question, String answer) {
         this.test_id = test_id;
         this.title = title;
         this.body = body;
         this.question = question;
+        this.answer = answer;
     }
 
     public Test(String title, String body){

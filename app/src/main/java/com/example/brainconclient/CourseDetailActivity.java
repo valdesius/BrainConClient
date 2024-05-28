@@ -174,7 +174,8 @@ getUserTests();
                                 = new Test(responseObject.getInt("test_id"),
                                 responseObject.getString("title"),
                                 responseObject.getString("body"),
-                                responseObject.getString("question"));
+                                responseObject.getString("question"),
+                                responseObject.getString("answer"));
                         testList.add(test);
 
                     } catch (JSONException e) {

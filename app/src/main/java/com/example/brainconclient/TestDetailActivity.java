@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +31,10 @@ public class TestDetailActivity extends AppCompatActivity {
 
     private TextView testDtlTitle,  testDtlBody, testDtlQuestion;
     private SharedPreferences preferences;
-
+    private Button submitAnswerBtn;
     private RequestQueue requestQueue;
     private TextView deleteTestBtn;
+    private EditText answerEditText;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -49,6 +52,8 @@ public class TestDetailActivity extends AppCompatActivity {
         testDtlTitle    = findViewById(R.id.test_dtl_title);
         testDtlBody     = findViewById(R.id.test_dtl_body);
         testDtlQuestion = findViewById(R.id.test_dtl_question);
+        submitAnswerBtn = findViewById(R.id.submit_answer_btn);
+        answerEditText = findViewById(R.id.answer_edit_text);
         deleteTestBtn   = findViewById(R.id.delete_test_btn);
 
         // GET INTEND DATA:
@@ -56,12 +61,29 @@ public class TestDetailActivity extends AppCompatActivity {
         String testTitle = getIntent().getStringExtra("test_title");
         String testBody = getIntent().getStringExtra("test_body");
         String testQuestion = getIntent().getStringExtra("test_question");
+        String testAnswer = getIntent().getStringExtra("test_answer");
 
         // SET VALUES TO VIEW COMPONENTS:
         testDtlTitle.setText(testTitle);
         testDtlBody.setText(testBody);
         testDtlQuestion.setText(testQuestion);
 
+
+        submitAnswerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String answer = answerEditText.getText().toString();
+                if (testAnswer != null && testAnswer.equals(answer)) {
+                    Toast.makeText(TestDetailActivity.this, " Correct Answer! ", Toast.LENGTH_LONG).show();
+
+                    goToSuccessActivity();
+                } else {
+                    Toast.makeText(TestDetailActivity.this, " Incorrect Answer! ", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
         // DELETE NOTE ON CLICK LISTENER OBJECT:
         deleteTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +93,13 @@ public class TestDetailActivity extends AppCompatActivity {
             }
             // END OF ON CLICK METHOD.
         });
+
+
         // END OF DELETE NOTE ON CLICK LISTENER OBJECT.
+    }
+    public void goToSuccessActivity(){
+        Intent intent = new Intent(TestDetailActivity.this, SuccessTestActivity.class);
+        startActivity(intent);
     }
     // END OF ON CREATE METHOD.
 

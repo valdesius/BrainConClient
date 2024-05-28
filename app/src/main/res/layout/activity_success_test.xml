@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1B1919"
+    android:gravity="center"
+    android:padding="15dp"
+    tools:context=".SuccessActivity">
+
+    <!-- Image -->
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+
+        android:src="@drawable/splashfor"/>
+
+    <!-- Success Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Тест пройден!"
+        android:textSize="35sp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
+        android:textFontWeight="700"/>
+
+    <!-- Return To Home Button -->
+    <Button
+        android:id="@+id/success_return_course_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#1e90ff"
+        android:layout_marginTop="20dp"
+        android:text="Вернуться к курсам"
+        android:textColor="#FFFFFF"/>
+
+
+</LinearLayout>

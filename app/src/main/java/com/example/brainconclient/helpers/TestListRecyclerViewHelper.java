@@ -52,6 +52,7 @@ public class TestListRecyclerViewHelper extends RecyclerView.Adapter<TestListRec
                 intent.putExtra("test_title", test.getTitle());
                 intent.putExtra("test_body", test.getBody());
                 intent.putExtra("test_question", test.getQuestion());
+                intent.putExtra("test_answer", test.getAnswer());
                 context.startActivity(intent);
             }
         });
