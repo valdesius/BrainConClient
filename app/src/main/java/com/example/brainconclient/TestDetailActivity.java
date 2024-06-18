@@ -74,11 +74,11 @@ public class TestDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String answer = answerEditText.getText().toString();
                 if (testAnswer != null && testAnswer.equals(answer)) {
-                    Toast.makeText(TestDetailActivity.this, " Correct Answer! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TestDetailActivity.this, " Верный ответ! ", Toast.LENGTH_LONG).show();
 
                     goToSuccessActivity();
                 } else {
-                    Toast.makeText(TestDetailActivity.this, " Incorrect Answer! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TestDetailActivity.this, " Неверный ответ! ", Toast.LENGTH_LONG).show();
                 }
 
 

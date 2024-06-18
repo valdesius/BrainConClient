@@ -9,8 +9,11 @@
 
 
     tools:context=".CourseDetailActivity">
+
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_test_btn"
+        android:id="@+id/create_comment_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -18,7 +21,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="40dp"
         android:clickable="true"
-        app:srcCompat="@drawable/baseline_add_24" />
+        app:srcCompat="@drawable/baseline_add_comment_24" />
     <!-- Note Detail Wrapper -->
     <LinearLayout
         android:id="@+id/to_test"
@@ -53,6 +56,19 @@
             android:textColor="@color/white"
             android:layout_marginBottom="10dp"/>
 
+        <Button
+            android:id="@+id/create_test_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1e90ff"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:paddingLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp"
+            android:text="Создать тест"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
         <androidx.recyclerview.widget.RecyclerView
 
             android:id="@+id/test_list_recycler_view"

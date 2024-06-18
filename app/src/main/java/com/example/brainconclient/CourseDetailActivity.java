@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,9 +43,10 @@ import java.util.Map;
 
 public class CourseDetailActivity extends AppCompatActivity {
 
-    private TextView noteDtlTitle,  noteDtlBody;
+    private TextView noteDtlTitle, noteDtlBody;
+    private Button createTestBtn;
     private RequestQueue mRequestQueue;
-    private FloatingActionButton createTestBtn;
+        private FloatingActionButton createCommentBtn;
     private SharedPreferences preferences;
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerView;
@@ -67,13 +69,14 @@ public class CourseDetailActivity extends AppCompatActivity {
         requestQueue = MyVolleySingletonUtil.getInstance(CourseDetailActivity.this).getRequestQueue();
         recyclerView = findViewById(R.id.test_list_recycler_view);
         // HOOK / INITIATE VIEW ELEMENTS / COMPONENTS:
-        noteDtlTitle    = findViewById(R.id.note_dtl_title);
-        noteDtlBody     = findViewById(R.id.note_dtl_body);
-        deleteNoteBtn   = findViewById(R.id.delete_course_btn);
+        noteDtlTitle = findViewById(R.id.note_dtl_title);
+        noteDtlBody = findViewById(R.id.note_dtl_body);
+        deleteNoteBtn = findViewById(R.id.delete_course_btn);
         createTestBtn = findViewById(R.id.create_test_btn);
+        createCommentBtn = findViewById(R.id.create_comment_btn);
 
         // GET INTEND DATA:
-        String noteId   = getIntent().getStringExtra("note_id");
+        String noteId = getIntent().getStringExtra("note_id");
         String noteTitle = getIntent().getStringExtra("note_title");
         String noteBody = getIntent().getStringExtra("note_body");
         mRequestQueue = MyVolleySingletonUtil.getInstance(CourseDetailActivity.this).getRequestQueue();
@@ -83,17 +86,27 @@ public class CourseDetailActivity extends AppCompatActivity {
         noteDtlBody.setText(noteBody);
         recyclerView.setLayoutManager(new LinearLayoutManager(CourseDetailActivity.this));
         testList = new ArrayList<>();
-createTestFloatingActionButton();
-getUserTests();
+        createCommentFloatingActionButton();
+        getUserTests();
 
         createTestBtn = findViewById(R.id.create_test_btn);
-        noteDtlTitle.setOnClickListener(new View.OnClickListener() {
+
+        createCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=  new Intent(CourseDetailActivity.this, LoginActivity.class);
+                Intent intent = new Intent(CourseDetailActivity.this, CommentActivity.class);
                 startActivity(intent);
             }
         });
+        noteDtlTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CourseDetailActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         // DELETE NOTE ON CLICK LISTENER OBJECT:
@@ -109,11 +122,11 @@ getUserTests();
     }
     // END OF ON CREATE METHOD.
 
-    public void deleteNote(String note_Id){
+    public void deleteNote(String note_Id) {
         StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteNoteApiUri(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("CourseDetailActivity","Course Deleted Successfully!");
+                Log.i("CourseDetailActivity", "Course Deleted Successfully!");
                 Toast.makeText(CourseDetailActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(CourseDetailActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -129,7 +142,7 @@ getUserTests();
                 Toast.makeText(CourseDetailActivity.this, "Failed to delete course", Toast.LENGTH_LONG).show();
             }
             // END OF ON ERROR RESPONSE METHOD.
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<String, String>();
@@ -140,10 +153,10 @@ getUserTests();
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-               String token = preferences.getString("token", "");
-               Map<String, String> headers = new HashMap<>();
-               headers.put("Authorization", "Bearer " + token);
-               return headers;
+                String token = preferences.getString("token", "");
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
             }
             // END OF GET HEADERS METHOD.
         };
@@ -218,23 +231,24 @@ getUserTests();
     }
     // END OF DELETE NOTE METHOD.
 
-    public void goToSuccessActivity(){
+    public void goToSuccessActivity() {
         Intent goToSuccess = new Intent(CourseDetailActivity.this, SuccessActivity.class);
         startActivity(goToSuccess);
         finish();
     }
 
-    public void createTestFloatingActionButton() {
+    public void createCommentFloatingActionButton() {
         createTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToCreateTestActivity();
+                goToCreateCommentActivity();
             }
             // END ON CLICK METHOD.
         });
     }
-    public void goToCreateTestActivity() {
-        Intent goToCreateNote = new Intent(CourseDetailActivity.this, CreateTestActivity.class);
+
+    public void goToCreateCommentActivity() {
+        Intent goToCreateNote = new Intent(CourseDetailActivity.this, CommentActivity.class);
         startActivity(goToCreateNote);
     }
     // END OF GO TO SUCCESS ACTIVITY METHOD.

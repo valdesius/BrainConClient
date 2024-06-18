@@ -4,7 +4,9 @@
     android:layout_height="match_parent" android:background="#1f1f1f" android:orientation="vertical"
 
     android:padding="15dp" tools:context=".TestDetailActivity">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <!-- Note Detail Wrapper -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +69,7 @@
             android:textColor="#FFFFFF"/>
     </LinearLayout>
     <!-- End Of Note Detail Wrapper -->
-
+</ScrollView>
     <TextView
         android:id="@+id/delete_test_btn"
         android:layout_width="wrap_content"

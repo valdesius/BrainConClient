@@ -69,4 +69,8 @@ public class ApiLinksHelper {
 
 
 
+    public static String getMyCommentsApiUri(){
+        return BASE_URL + "comment/all";
+    }
+
 }
