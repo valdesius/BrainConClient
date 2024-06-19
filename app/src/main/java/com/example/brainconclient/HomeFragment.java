@@ -62,9 +62,15 @@ public class HomeFragment extends Fragment {
         preferences = getActivity().getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
         createCourseBtn = view.findViewById(R.id.create_courses_btn);
 //        displayUsername = view.findViewById(R.id.display_username);
-
+        boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
         recyclerView = view.findViewById(R.id.note_list_recycler_view);
-
+        if (isGuest) {
+            // Если пользователь является гостем, скрываем кнопку
+            createCourseBtn.setVisibility(View.GONE);
+        } else {
+            // Если пользователь не является гостем, отображаем кнопку и устанавливаем обработчик нажатия
+            createNoteFloatingActionButton();
+        }
 //        setDisplayUsername();
 
         // Получаем сохраненную роль пользователя

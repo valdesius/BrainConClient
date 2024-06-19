@@ -27,7 +27,6 @@ android:layout_marginTop="720dp"
 
         android:orientation="vertical">
 
-
         <TextView
             android:id="@+id/test_txt"
             android:layout_width="wrap_content"

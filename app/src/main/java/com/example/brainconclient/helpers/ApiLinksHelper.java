@@ -17,7 +17,7 @@ public class ApiLinksHelper {
     // END OF REGISTER USER API URI METHOD.
 
     public static String getMyNotesApiUri(){
-        return BASE_URL + "note/my_notes";
+        return BASE_URL + "note/all";
     }
     // END OF GET MY NOTES API URI METHOD.
 

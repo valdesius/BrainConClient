@@ -63,6 +63,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
         // Загрузка статуса избранного из SharedPreferences
         boolean isFavorite = preferences.getBoolean("favorite_" + course.getNote_id(), false);
         course.setFavorite(isFavorite); // Обновление статуса избранного в объекте курса
+        boolean isGuest = preferences.getBoolean("isGuest", false);
 
         // Установка текста заголовка и описания курса
         holder.noteTitle.setText(course.getTitle());
@@ -72,6 +73,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
         holder.favoriteButton.setImageResource(isFavorite ? R.drawable.hearred : R.drawable.heart);
 
         // Обработчик нажатия на элемент списка курсов
+        if (!isGuest) {
         holder.noteItemLayout.setOnClickListener(v -> {
             Intent intent = new Intent(context, CourseDetailActivity.class);
             intent.putExtra("note_id", String.valueOf(course.getNote_id()));
@@ -89,7 +91,12 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
 
             updateFavoriteStatusOnServer(course.getNote_id(), newFavStatus);
             notifyItemChanged(position);
-        });
+        });}
+        else {
+            // Если пользователь является гостем, убираем все обработчики нажатия
+            holder.noteItemLayout.setOnClickListener(null);
+            holder.favoriteButton.setOnClickListener(null);
+        }
     }
 
     private void updateFavoriteStatusOnServer(int noteId, boolean newStatus) {
