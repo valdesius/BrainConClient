@@ -130,6 +130,7 @@ public class HomeFragment extends Fragment {
         createCourseBtn.setOnClickListener(v -> goToCreateNoteActivity());
     }
 
+
     public void goToCreateNoteActivity() {
         Intent goToCreateNote = new Intent(getActivity(), CreateCourseActivity.class);
         startActivity(goToCreateNote);

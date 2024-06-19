@@ -21,7 +21,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.example.brainconclient.CourseDetailActivity;
+import com.example.brainconclient.LoginActivity;
 import com.example.brainconclient.R;
+import com.example.brainconclient.RegisterActivity;
 import com.example.brainconclient.models.Course;
 import com.example.brainconclient.utils.MyVolleySingletonUtil;
 
@@ -50,6 +52,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
 
         return new NoteListViewHolder(v);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull NoteListViewHolder holder, int position) {
@@ -82,6 +85,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
             holder.noteItemLayout.setOnClickListener(null);
             holder.favoriteButton.setOnClickListener(null);
         }
+
     }
 
     private void updateFavoriteStatusOnServer(int noteId, boolean newStatus) {

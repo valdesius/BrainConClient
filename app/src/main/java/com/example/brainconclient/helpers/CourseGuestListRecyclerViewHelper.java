@@ -22,6 +22,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.example.brainconclient.CourseDetailActivity;
 import com.example.brainconclient.R;
+import com.example.brainconclient.RegisterActivity;
 import com.example.brainconclient.models.Course;
 import com.example.brainconclient.utils.MyVolleySingletonUtil;
 
@@ -64,10 +65,11 @@ public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<Cour
 
         if (!isGuest) {
             holder.noteItemLayout.setOnClickListener(v -> {
-                Intent intent = new Intent(context, CourseDetailActivity.class);
+                Intent intent = new Intent(context, RegisterActivity.class);
                 intent.putExtra("note_id", String.valueOf(course.getNote_id()));
                 intent.putExtra("note_title", course.getTitle());
                 intent.putExtra("note_body", course.getBody());
+                context.startActivity(intent);
             });
 
             holder.favoriteButton.setOnClickListener(v -> {
@@ -80,6 +82,7 @@ public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<Cour
         } else {
             holder.noteItemLayout.setOnClickListener(null);
             holder.favoriteButton.setOnClickListener(null);
+
         }
     }
 
