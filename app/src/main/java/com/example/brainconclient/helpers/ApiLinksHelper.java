@@ -72,5 +72,8 @@ public class ApiLinksHelper {
     public static String getMyCommentsApiUri(){
         return BASE_URL + "comment/all";
     }
+    public static String createCommentApiUri(){
+        return BASE_URL + "comment/createComment";
+    }
 
 }

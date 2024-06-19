@@ -27,7 +27,14 @@ public class CommentListRecyclerViewHelper extends RecyclerView.Adapter<CommentL
         this.context = context;
     }
     // END OF NOTE LIST RECYCLER VIEW HELPER CLASS CONSTRUCTOR.
-
+    public void addComment(Comment comment) {
+        // Добавляем новый комментарий в начало списка
+        commentListItems.add(0, comment);
+        // Уведомляем адаптер о добавлении нового элемента
+        notifyItemInserted(0);
+        // Если нужно, прокручиваем список к началу
+        // recyclerView.scrollToPosition(0);
+    }
     @NonNull
     @Override
     public CommentListRecyclerViewHelper.CommentListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +57,8 @@ public class CommentListRecyclerViewHelper extends RecyclerView.Adapter<CommentL
                 Intent intent = new Intent(context, CommentActivity.class);
                 intent.putExtra("comment_id", String.valueOf(comment.getComment_id()));
                 intent.putExtra("content", comment.getContent());
+                intent.putExtra("created_at", comment.getContent());
+                intent.putExtra("username", comment.getUsername());
                 context.startActivity(intent);
             }
         });

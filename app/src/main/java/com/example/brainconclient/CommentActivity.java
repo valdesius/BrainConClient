@@ -1,13 +1,18 @@
 package com.example.brainconclient;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -22,6 +27,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.brainconclient.helpers.ApiLinksHelper;
 import com.example.brainconclient.helpers.CommentListRecyclerViewHelper;
 import com.example.brainconclient.helpers.StringResourceHelper;
@@ -48,6 +54,9 @@ public class CommentActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private RequestQueue mRequestQueue;
     private List<Comment> commentList;
+    private ImageView sendCommentButton;
+
+    private EditText createContent;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +64,24 @@ public class CommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comment);
         actionBar = getSupportActionBar();
         actionBar.setTitle("Комментарии");
+        sendCommentButton = findViewById(R.id.send_comment_button);
 
         requestQueue = MyVolleySingletonUtil.getInstance(CommentActivity.this).getRequestQueue();
         recyclerView = findViewById(R.id.comment_list_recycler_view);
         preferences = getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
 
         mRequestQueue = MyVolleySingletonUtil.getInstance(CommentActivity.this).getRequestQueue();
-
+        createContent = findViewById(R.id.comment_edit_text);
         recyclerView.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
         commentList = new ArrayList<>();
         getUserComments();
+
+        sendCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createComment();
+            }
+        });
     }
 
     public void getUserComments() {
@@ -109,7 +126,7 @@ public class CommentActivity extends AppCompatActivity {
                 error.printStackTrace();
 //                progressBar.setVisibility(View.GONE);
                 Log.i("MainActivity", error.toString());
-                Toast.makeText(CommentActivity.this, "Не удалось получить список курсов", Toast.LENGTH_LONG).show();
+                Toast.makeText(CommentActivity.this, "Не удалось получить список комментариев", Toast.LENGTH_LONG).show();
             }
             // END OF ON ERROR RESPONSE METHOD.
         }) {
@@ -127,6 +144,58 @@ public class CommentActivity extends AppCompatActivity {
 
         // ADD / RUN REQUEST QUE:
     }
+    public void createComment(){
+        String content = createContent.getText().toString();
 
+        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.createCommentApiUri(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("CommentActivity", "Created comment!");
+                Toast.makeText(CommentActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+
+                Comment newComment = new Comment(content);
+                if (adapter instanceof CommentListRecyclerViewHelper) {
+                    // Приводим адаптер к нужному типу и вызываем метод addComment
+                    ((CommentListRecyclerViewHelper) adapter).addComment(newComment);
+                }
+
+                finish();
+                startActivity(getIntent());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Log.i("CommentActivity", "Ошибка в создании комментария");
+                Toast.makeText(CommentActivity.this, "Failed to create comment", Toast.LENGTH_LONG).show();
+            }
+            // END OF ON ERROR RESPONSE METHOD.
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<String, String>();
+                params.put("content", content);
+                return params;
+            }
+            // END OF GET PARAMS METHOD.
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String token = preferences.getString("token", "");
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
+            }
+            // END OF GET HEADERS METHOD.
+        };
+
+        // END OF STRING REQUEST OBJECT.
+
+        // ADD / SEND REQUEST:
+        requestQueue.add(request);
+
+
+    }
 
 }
