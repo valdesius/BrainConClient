@@ -55,7 +55,7 @@ public class SearchFragment extends Fragment {
         // Инициализация списка всех курсов и адаптера
         allCourses = getAllCourses(); // Здесь должен быть ваш метод для получения всех курсов
         filteredCourses = new ArrayList<>(allCourses);
-        adapter = new CourseListRecyclerViewHelper(filteredCourses, getActivity());
+        adapter = new CourseListRecyclerViewHelper(filteredCourses, getActivity(), preferences.getBoolean("isGuest", false));
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         searchResultsRecyclerView.setAdapter(adapter);
 

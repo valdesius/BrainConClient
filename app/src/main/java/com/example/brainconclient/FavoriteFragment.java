@@ -1,6 +1,5 @@
 package com.example.brainconclient;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -74,7 +73,7 @@ public class FavoriteFragment extends Fragment {
                             Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
                         }
                     }
-                    adapter = new CourseListRecyclerViewHelper(favoriteCourses, getActivity());
+                    adapter = new CourseListRecyclerViewHelper(favoriteCourses, getActivity(), preferences.getBoolean("isGuest", false));
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();

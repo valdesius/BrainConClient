@@ -29,13 +29,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseListRecyclerViewHelper.NoteListViewHolder> {
+public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<CourseGuestListRecyclerViewHelper.NoteListViewHolder> {
     private SharedPreferences preferences;
     private List<Course> courseListItems;
     private Context context;
     private RequestQueue requestQueue;
 
-    public CourseListRecyclerViewHelper(List<Course> courseListItems, Context context, boolean isGuest){
+    public CourseGuestListRecyclerViewHelper(List<Course> courseListItems, Context context, boolean isGuest){
         this.courseListItems = courseListItems;
         this.context = context;
         this.preferences = context.getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), Context.MODE_PRIVATE);
@@ -68,7 +68,6 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
                 intent.putExtra("note_id", String.valueOf(course.getNote_id()));
                 intent.putExtra("note_title", course.getTitle());
                 intent.putExtra("note_body", course.getBody());
-                context.startActivity(intent);
             });
 
             holder.favoriteButton.setOnClickListener(v -> {

@@ -3,6 +3,7 @@ package com.example.brainconclient;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.brainconclient.helpers.ApiLinksHelper;
+import com.example.brainconclient.helpers.CourseGuestListRecyclerViewHelper;
 import com.example.brainconclient.helpers.CourseListRecyclerViewHelper;
 import com.example.brainconclient.helpers.StringResourceHelper;
 import com.example.brainconclient.models.Course;
@@ -50,91 +52,68 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private FloatingActionButton createCourseBtn;
     SharedPreferences preferences;
-    private Button addCourseButtonOrAllCourses;
 
-    TextView displayUsername;
-
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        preferences = getActivity().getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), Context.MODE_PRIVATE);
         createCourseBtn = view.findViewById(R.id.create_courses_btn);
-//        displayUsername = view.findViewById(R.id.display_username);
-        boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
         recyclerView = view.findViewById(R.id.note_list_recycler_view);
+
+        // Получаем статус пользователя (гость или авторизированный)
+        boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
+
+        // Устанавливаем свойство clickable для RecyclerView
+        recyclerView.setClickable(!isGuest);
+
         if (isGuest) {
-            // Если пользователь является гостем, скрываем кнопку
             createCourseBtn.setVisibility(View.GONE);
         } else {
-            // Если пользователь не является гостем, отображаем кнопку и устанавливаем обработчик нажатия
             createNoteFloatingActionButton();
         }
-//        setDisplayUsername();
-
-        // Получаем сохраненную роль пользователя
 
         mRequestQueue = MyVolleySingletonUtil.getInstance(getActivity()).getRequestQueue();
-
-        // Устанавливаем текст кнопки в зависимости от роли
-        createNoteFloatingActionButton();
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         courseList = new ArrayList<>();
-        getUserNotes();
+        getUserNotes(getActivity());
         return view;
     }
-
-    public void getUserNotes() {
-        // SET USER DATA MAP OBJECT:
-        HashMap<String, String> params = new HashMap<String, String>();
+    public void getUserNotes(Context context) {
+        HashMap<String, String> params = new HashMap<>();
         params.put("token", "email");
-
-        JsonArrayRequest jsonArrayRequest
-                = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyNotesApiUri(), null, new Response.Listener<JSONArray>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onResponse(JSONArray response) {
-//                progressBar.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
-
-                filterFavoriteCourses(response);
-
-                for (int i = 0; i < response.length(); i++) {
-
-                    try {
-                        JSONObject responseObject = response.getJSONObject(i);
-                        Course note
-                                = new Course(responseObject.getInt("note_id"),
-                                responseObject.getString("title"),
-                                responseObject.getString("body"));
-                        courseList.add(note);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
+        boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyNotesApiUri(), null,
+                response -> {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    filterFavoriteCourses(response);
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject responseObject = response.getJSONObject(i);
+                            Course note = new Course(responseObject.getInt("note_id"),
+                                    responseObject.getString("title"),
+                                    responseObject.getString("body"));
+                            courseList.add(note);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show();
+                        }
                     }
-                    // END OF TRY BLOCK
-                }
-                // END OF RESPONSE FOR LOOP.
-                adapter = new CourseListRecyclerViewHelper(courseList, getActivity());
-
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-
-            }
-            // END OF ON SUCCESS RESPONSE METHOD.
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-//                progressBar.setVisibility(View.GONE);
-                Log.i("MainActivity", error.toString());
-                Toast.makeText(getActivity(), "Не удалось получить список курсов", Toast.LENGTH_LONG).show();
-            }
-            // END OF ON ERROR RESPONSE METHOD.
-        }) {
+                    if (isGuest){
+                        adapter = new CourseGuestListRecyclerViewHelper(courseList, context, preferences.getBoolean("isGuest", false));
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        adapter = new CourseListRecyclerViewHelper(courseList, context, preferences.getBoolean("isGuest", false));
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Log.i("HomeFragment", error.toString());
+                    Toast.makeText(context, "Не удалось получить список курсов", Toast.LENGTH_LONG).show();
+                }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 String token = preferences.getString("token", "");
@@ -145,27 +124,17 @@ public class HomeFragment extends Fragment {
             }
         };
         mRequestQueue.add(jsonArrayRequest);
-        //  END OF JSON ARRAY REQUEST OBJECT.
-
-        // ADD / RUN REQUEST QUE:
     }
 
-
-
     public void createNoteFloatingActionButton() {
-        createCourseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToCreateNoteActivity();
-            }
-            // END ON CLICK METHOD.
-        });
+        createCourseBtn.setOnClickListener(v -> goToCreateNoteActivity());
     }
 
     public void goToCreateNoteActivity() {
         Intent goToCreateNote = new Intent(getActivity(), CreateCourseActivity.class);
         startActivity(goToCreateNote);
     }
+
     private void filterFavoriteCourses(JSONArray courses) {
         favoriteCourseList = new ArrayList<>();
         for (int i = 0; i < courses.length(); i++) {
@@ -184,12 +153,9 @@ public class HomeFragment extends Fragment {
         updateUIWithFavorites();
     }
 
-    // Метод для обновления UI избранными курсами
     private void updateUIWithFavorites() {
-        adapter = new CourseListRecyclerViewHelper(favoriteCourseList, getActivity());
+        adapter = new CourseListRecyclerViewHelper(favoriteCourseList, getActivity(), preferences.getBoolean("isGuest", false));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
-
-
 }

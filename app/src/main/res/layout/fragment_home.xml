@@ -46,7 +46,7 @@ android:layout_marginTop="720dp"
             android:id="@+id/note_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:clickable="false"
             android:visibility="gone"/>
     </LinearLayout>
 
