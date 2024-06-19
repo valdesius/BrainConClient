@@ -40,6 +40,9 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private TextView txtGoToSignUp;
+
+    private RadioButton studRButton;
+    private RadioButton mentRButton;
     private Button registerBtn;
     private TextInputEditText txtRegFirstName, txtRegLastName, txtRegEmail, txtRegPassword, txtRegConfirm;
     private TextInputLayout txtRegFirstNameLayout, txtRegLastNameLayout,txtRegEmailLayout, txtRegPassLayout, txtRegConfirmLayout;
@@ -73,6 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
         txtRegEmailLayout       = findViewById(R.id.txt_email_layout);
         txtRegPassLayout        = findViewById(R.id.txt_password_layout);
         txtRegConfirmLayout     = findViewById(R.id.txt_confirm_layout);
+        studRButton = findViewById(R.id.studentRadioButton);
+        mentRButton = findViewById(R.id.mentorRadioButton);
 
         // VALIDATE FORM DATA / FIELDS:
         RegistrationFormValidatorHelper regFormValidator
@@ -118,6 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
         String last_name    = txtRegLastName.getText().toString();
         String email        = txtRegEmail.getText().toString();
         String password     = txtRegPassword.getText().toString();
+        String role;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiLinksHelper.registerUserApiUri(), new Response.Listener<String>() {
             @Override
@@ -145,6 +151,11 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put("last_name", last_name);
                 params.put("email", email);
                 params.put("password", password);
+                if (studRButton.isChecked()) {
+                    params.put("role", "STUDENT");
+                } else {
+                    params.put("role", "MENTOR");
+                }
 
                 return params;
             }

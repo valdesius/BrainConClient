@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
 
     private LoginFormValidationHelper loginValidator;
-    private TextView  txtGoToSignIn;
+    private TextView  txtGoToSignIn , txtGoToGuest;
 
     private TextInputEditText txt_email, txt_password;
     private TextInputLayout txtEmailLayout, txtPasswordLayout;
@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         // GET LAYOUTS:
         txtEmailLayout      = findViewById(R.id.txt_email_layout);
         txtPasswordLayout   = findViewById(R.id.txt_password_layout);
+        txtGoToGuest = findViewById(R.id.txt_go_to_guest);
 
         // GET FORM VALIDATOR OBJECT:
         loginValidator = new LoginFormValidationHelper(txt_email, txt_password, txtEmailLayout, txtPasswordLayout, loginBtn);
@@ -77,6 +78,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // REDIRECT TO REGISTER ACTIVITY:
         redirectToRegister();
+
+        txtGoToGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("isGuest", true); // Передаем флаг, указывающий на вход как гость
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
     // END OF ON CREATE LOGIN ACTIVITY METHOD.

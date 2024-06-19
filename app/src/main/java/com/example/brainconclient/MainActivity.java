@@ -2,6 +2,7 @@ package com.example.brainconclient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,10 +21,12 @@ public class MainActivity extends AppCompatActivity {
     ProfileFragment profileFragment = new ProfileFragment();
     FavoriteFragment favoriteFragment = new FavoriteFragment();
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean isGuest = getIntent().getBooleanExtra("isGuest", false);
         prefs = getSharedPreferences("YourPrefsName", Context.MODE_PRIVATE);
         isLoggedIn = prefs.getBoolean("isLoggedIn", false);
 
@@ -50,21 +53,32 @@ public class MainActivity extends AppCompatActivity {
 
 // Обработчик выбора пунктов нижнего навигационного меню
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.home) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
-                return true;
-            } else if (itemId == R.id.profile) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
-                return true;
-            } else if (itemId == R.id.search) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
+            if (isGuest) {
+                if (item.getItemId() == R.id.home) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                    return true;
+                } else if (item.getItemId() == R.id.search) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
+                    return true;
+                }
+                // Гость не может перейти на другие страницы
+                return false;
+            } else {
+                // Пользователь вошел в систему, доступ ко всем фрагментам
+                if (item.getItemId() == R.id.home) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                } else if (item.getItemId() == R.id.search) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
+                } else if (item.getItemId() == R.id.profile) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
+                } else if (item.getItemId() == R.id.fav) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, favoriteFragment).commit();
+                } else {
+                    // Если ни один из известных пунктов меню не выбран
+                    return false;
+                }
                 return true;
             }
-            else if (itemId == R.id.fav) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, favoriteFragment).commit();
-                return true;}
-            return false;
         });
     }
 
