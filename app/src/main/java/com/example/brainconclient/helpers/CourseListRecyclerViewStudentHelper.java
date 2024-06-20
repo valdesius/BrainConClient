@@ -22,9 +22,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.example.brainconclient.CourseDetailActivity;
 import com.example.brainconclient.CourseDetailActivityStudent;
-import com.example.brainconclient.LoginActivity;
 import com.example.brainconclient.R;
-import com.example.brainconclient.RegisterActivity;
 import com.example.brainconclient.models.Course;
 import com.example.brainconclient.utils.MyVolleySingletonUtil;
 
@@ -32,13 +30,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseListRecyclerViewHelper.NoteListViewHolder> {
+public class CourseListRecyclerViewStudentHelper extends RecyclerView.Adapter<CourseListRecyclerViewStudentHelper.NoteListViewHolder> {
     private SharedPreferences preferences;
     private List<Course> courseListItems;
     private Context context;
     private RequestQueue requestQueue;
 
-    public CourseListRecyclerViewHelper(List<Course> courseListItems, Context context, boolean isGuest){
+    public CourseListRecyclerViewStudentHelper(List<Course> courseListItems, Context context, boolean isGuest){
         this.courseListItems = courseListItems;
         this.context = context;
         this.preferences = context.getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), Context.MODE_PRIVATE);
@@ -94,7 +92,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
 
         StringRequest request = new StringRequest(Request.Method.PUT, url, response -> {
             // Обработка успешного ответа сервера
-            Log.i("CourseListRecyclerViewHelper", "Статус избранного обновлён!");
+            Log.i("CourseListRecyclerViewHelperStudent", "Статус избранного обновлён!");
             Toast.makeText(context, "Favorite status updated", Toast.LENGTH_SHORT).show();
         }, error -> {
             // Обработка ошибки

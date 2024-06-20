@@ -3,6 +3,7 @@ package com.example.brainconclient;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ import java.util.HashMap;
 
 
 public class LoginActivity extends AppCompatActivity {
-
+    private Intent intent;
     //private static final String USER_DETAIL_PREF = "USER_INFO";
     private SharedPreferences preferences;
     private RequestQueue mRequestQueue;
@@ -129,30 +130,38 @@ public class LoginActivity extends AppCompatActivity {
                 = new JsonObjectRequest(Request.Method.POST, ApiLinksHelper.authUserApiUri(), new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
-                // INITIATE PREFERENCES:
                 preferences = getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
+                Log.d("LoginActivity", "Response from server: " + response.toString()); // Добавлено логирование ответа
                 try {
+                    String role = response.getString("role").replace("ROLE_", "");
 
                     editor.putInt("user_id", response.getInt("userId"));
                     editor.putString("first_name", response.getString("firstName"));
                     editor.putString("last_name", response.getString("lastName"));
                     editor.putString("username", response.getString("username"));
+                    editor.putString("role", role);
                     editor.putString("token", response.getString("token"));
                     editor.putBoolean("authenticated", true);
                     editor.apply();
-                    // REDIRECT TO MAIN IF AUTHENTICATED:
-                    goToMainIfAuthenticated();
 
+                    switch (role) {
+
+                        case "STUDENT":
+                            goToMainStudentIfAuthenticated();
+                            Log.e("LoginActivity", "студент");
+                            break;
+                        case "MENTOR":
+                            Log.e("LoginActivity", "МЕНТОР");
+                            goToMainIfAuthenticated();
+                            break;
+                        default:
+
+                            break;
+                    }
                 } catch (JSONException e) {
-                    e.printStackTrace();
-                    System.out.println("Error msg 1 try block: " + e.getMessage());
-                    System.out.println("Error msg 2: " + "In try block");
-                    Toast.makeText(LoginActivity.this, "Try Block error:" + e.getMessage(), Toast.LENGTH_LONG).show();
-                    throw new RuntimeException(e);
+                    Log.e("LoginActivity", "Key missing in the response: " + e.getMessage(), e); // Улучшенное логирование ошибки
                 }
-                // END OF JSON RESPONSE OBJECT TRY BLOCK.
             }
             // END OF ON RESPONSE METHOD.
         }, new Response.ErrorListener() {
@@ -182,6 +191,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void goToMainIfAuthenticated(){
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        // DISPLAY SUCCESS MESSAGE IF AUTHENTICATED:
+        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
+        finish();
+    }
+    public void goToMainStudentIfAuthenticated(){
+        Intent intent = new Intent(LoginActivity.this, MainActivityStudent.class);
         startActivity(intent);
         // DISPLAY SUCCESS MESSAGE IF AUTHENTICATED:
         Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();

@@ -73,32 +73,38 @@ public class ProfileFragment extends Fragment {
     }
 
     public void setUserDetailsInEditTextFields(){
+        boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
+
+        // Устанавливаем имя пользователя или "гость"
+        if (isGuest) {
+            txtProfFirstName.setText("Гость");} else {
         // GET STORED PREFERENCES:
         prefs = getActivity().getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
         // SET TEXT INPUT FIELDS VALUES:
         txtProfFirstName.setText(prefs.getString("first_name", ""));
-    }
+    }}
     public void goToProfileSettings() {
         Intent intent = new Intent(getContext(), ProfileActivity.class);
         startActivity(intent);
     }
 
 
-    public void logUserOut(){
-        clearAuthenticationPreferences();
+    public void logUserOut() {
+        clearPreferences();
         goToLogin();
-        Toast.makeText(getActivity(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
     }
+    // END OF LOG USER OUT METHOD.
 
-    public void clearAuthenticationPreferences(){
+    public void clearPreferences() {
         SharedPreferences.Editor editor = prefs.edit();
-        editor.remove("token"); // Удаляем только токен аутентификации
+        editor.clear();
         editor.apply();
     }
     // END OF LOGOUT OR CLEAR PREFERENCES.
 
-    public void goToLogin(){
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
+    public void goToLogin() {
+        Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

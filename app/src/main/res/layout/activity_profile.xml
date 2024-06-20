@@ -94,7 +94,7 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:backgroundTint="#1e90ff"
-       android:layout_marginTop="500dp"
+       android:layout_marginTop="70dp"
         android:paddingVertical="18dp"/>
 
 </LinearLayout>
