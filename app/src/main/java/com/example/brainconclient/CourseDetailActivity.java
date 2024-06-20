@@ -43,10 +43,10 @@ import java.util.Map;
 
 public class CourseDetailActivity extends AppCompatActivity {
 
-    private TextView noteDtlTitle, noteDtlBody;
+    private TextView courseDtlTitle, courseDtlBody;
     private Button createTestBtn;
     private RequestQueue mRequestQueue;
-        private FloatingActionButton createCommentBtn;
+    private FloatingActionButton createCommentBtn;
     private SharedPreferences preferences;
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerView;
@@ -54,7 +54,7 @@ public class CourseDetailActivity extends AppCompatActivity {
 
 
     private RequestQueue requestQueue;
-    private TextView deleteNoteBtn;
+    private TextView deleteCourseBtn;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -62,35 +62,36 @@ public class CourseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
 
-        // SET / GET PREFERENCES OBJECT:
         preferences = getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
 
-        // INITIATE REQUEST QUE:
         requestQueue = MyVolleySingletonUtil.getInstance(CourseDetailActivity.this).getRequestQueue();
         recyclerView = findViewById(R.id.test_list_recycler_view);
-        // HOOK / INITIATE VIEW ELEMENTS / COMPONENTS:
-        noteDtlTitle = findViewById(R.id.note_dtl_title);
-        noteDtlBody = findViewById(R.id.note_dtl_body);
-        deleteNoteBtn = findViewById(R.id.delete_course_btn);
+
+        courseDtlTitle = findViewById(R.id.course_dtl_title);
+        courseDtlBody = findViewById(R.id.course_dtl_body);
+        deleteCourseBtn = findViewById(R.id.delete_course_btn);
         createTestBtn = findViewById(R.id.create_test_btn);
         createCommentBtn = findViewById(R.id.create_comment_btn);
 
-        // GET INTEND DATA:
-        String noteId = getIntent().getStringExtra("note_id");
-        String noteTitle = getIntent().getStringExtra("note_title");
-        String noteBody = getIntent().getStringExtra("note_body");
+        String courseId = getIntent().getStringExtra("course_id");
+        String courseTitle = getIntent().getStringExtra("course_title");
+        String courseBody = getIntent().getStringExtra("course_body");
         mRequestQueue = MyVolleySingletonUtil.getInstance(CourseDetailActivity.this).getRequestQueue();
 
-        // SET VALUES TO VIEW COMPONENTS:
-        noteDtlTitle.setText(noteTitle);
-        noteDtlBody.setText(noteBody);
+        courseDtlTitle.setText(courseTitle);
+        courseDtlBody.setText(courseBody);
         recyclerView.setLayoutManager(new LinearLayoutManager(CourseDetailActivity.this));
         testList = new ArrayList<>();
         createCommentFloatingActionButton();
         getUserTests();
 
         createTestBtn = findViewById(R.id.create_test_btn);
-
+        createTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToCreateTestActivity();
+            }
+        });
         createCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,32 +99,24 @@ public class CourseDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        noteDtlTitle.setOnClickListener(new View.OnClickListener() {
+        courseDtlTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CourseDetailActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-
-
-
-
-        // DELETE NOTE ON CLICK LISTENER OBJECT:
-        deleteNoteBtn.setOnClickListener(new View.OnClickListener() {
+        deleteCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("CourseDetailActivity", "test id is: " + noteId);
-                deleteNote(noteId);
+                Log.i("CourseDetailActivity", "test id is: " + courseId);
+                deleteCourse(courseId);
             }
-            // END OF ON CLICK METHOD.
         });
-        // END OF DELETE NOTE ON CLICK LISTENER OBJECT.
     }
-    // END OF ON CREATE METHOD.
 
-    public void deleteNote(String note_Id) {
-        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteNoteApiUri(), new Response.Listener<String>() {
+    public void deleteCourse(String course_Id) {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteCourseApiUri(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("CourseDetailActivity", "Course Deleted Successfully!");
@@ -132,24 +125,21 @@ public class CourseDetailActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-            // END OF ON RESPONSE METHOD.
 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.i("CourseDetailActivity", "Failed to delete course with id of: " + note_Id);
+                Log.i("CourseDetailActivity", "Failed to delete course with id of: " + course_Id);
                 Toast.makeText(CourseDetailActivity.this, "Failed to delete course", Toast.LENGTH_LONG).show();
             }
-            // END OF ON ERROR RESPONSE METHOD.
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<String, String>();
-                params.put("note_id", note_Id);
+                params.put("course_id", course_Id);
                 return params;
             }
-            // END OF GET PARAMS METHOD.
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -158,16 +148,13 @@ public class CourseDetailActivity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
-            // END OF GET HEADERS METHOD.
         };
-        // END OF STRING REQUEST OBJECT.
 
-        // ADD / SEND REQUEST:
+
         requestQueue.add(request);
     }
 
     public void getUserTests() {
-        // SET USER DATA MAP OBJECT:
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("token", "email");
 
@@ -176,7 +163,6 @@ public class CourseDetailActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(JSONArray response) {
-//                progressBar.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
 
                 for (int i = 0; i < response.length(); i++) {
@@ -195,16 +181,13 @@ public class CourseDetailActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(CourseDetailActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
                     }
-                    // END OF TRY BLOCK
                 }
-                // END OF RESPONSE FOR LOOP.
                 adapter = new TestListRecyclerViewHelper(testList, CourseDetailActivity.this);
 
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
             }
-            // END OF ON SUCCESS RESPONSE METHOD.
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -213,7 +196,6 @@ public class CourseDetailActivity extends AppCompatActivity {
                 Log.i("MainActivity", error.toString());
                 Toast.makeText(CourseDetailActivity.this, "Не удалось получить список курсов", Toast.LENGTH_LONG).show();
             }
-            // END OF ON ERROR RESPONSE METHOD.
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -225,11 +207,7 @@ public class CourseDetailActivity extends AppCompatActivity {
             }
         };
         mRequestQueue.add(jsonArrayRequest);
-        //  END OF JSON ARRAY REQUEST OBJECT.
-
-        // ADD / RUN REQUEST QUE:
     }
-    // END OF DELETE NOTE METHOD.
 
     public void goToSuccessActivity() {
         Intent goToSuccess = new Intent(CourseDetailActivity.this, SuccessActivity.class);
@@ -243,15 +221,17 @@ public class CourseDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 goToCreateCommentActivity();
             }
-            // END ON CLICK METHOD.
         });
     }
 
-    public void goToCreateCommentActivity() {
-        Intent goToCreateNote = new Intent(CourseDetailActivity.this, CommentActivity.class);
-        startActivity(goToCreateNote);
+    public void goToCreateTestActivity() {
+        Intent goToCreateCourse = new Intent(CourseDetailActivity.this, CreateTestActivity.class);
+        startActivity(goToCreateCourse);
     }
-    // END OF GO TO SUCCESS ACTIVITY METHOD.
+
+    public void goToCreateCommentActivity() {
+        Intent goToCreateCourse = new Intent(CourseDetailActivity.this, CommentActivity.class);
+        startActivity(goToCreateCourse);
+    }
 
 }
-// END OF NOTE DETAIL ACTIVITY CLASS.

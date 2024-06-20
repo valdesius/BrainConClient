@@ -18,7 +18,7 @@
         android:layout_marginBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_note_title_field"
+            android:id="@+id/create_course_title_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="25dp"
@@ -35,7 +35,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_note_body_field"
+            android:id="@+id/create_course_body_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="25dp"
@@ -46,7 +46,7 @@
     <!-- End Of Body Text Field -->
 
     <Button
-        android:id="@+id/create_note_btn"
+        android:id="@+id/create_course_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cоздать курс"

@@ -1,30 +1,22 @@
 package com.example.brainconclient;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.brainconclient.helpers.ApiLinksHelper;
 import com.example.brainconclient.helpers.CourseGuestListRecyclerViewHelper;
@@ -42,7 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private RequestQueue mRequestQueue;
@@ -59,47 +50,45 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         preferences = getActivity().getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), Context.MODE_PRIVATE);
         createCourseBtn = view.findViewById(R.id.create_courses_btn);
-        recyclerView = view.findViewById(R.id.note_list_recycler_view);
+        recyclerView = view.findViewById(R.id.course_list_recycler_view);
 
-        // Получаем статус пользователя (гость или авторизированный)
         boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
-
-        // Устанавливаем свойство clickable для RecyclerView
         recyclerView.setClickable(!isGuest);
 
         if (isGuest) {
             createCourseBtn.setVisibility(View.GONE);
         } else {
-            createNoteFloatingActionButton();
+            createCourseFloatingActionButton();
         }
 
         mRequestQueue = MyVolleySingletonUtil.getInstance(getActivity()).getRequestQueue();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         courseList = new ArrayList<>();
-        getUserNotes(getActivity());
+        getUserCourses(getActivity());
         return view;
     }
-    public void getUserNotes(Context context) {
+
+    public void getUserCourses(Context context) {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", "email");
         boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyNotesApiUri(), null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyCoursesApiUri(), null,
                 response -> {
                     recyclerView.setVisibility(View.VISIBLE);
                     filterFavoriteCourses(response);
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject responseObject = response.getJSONObject(i);
-                            Course note = new Course(responseObject.getInt("note_id"),
+                            Course course = new Course(responseObject.getInt("course_id"),
                                     responseObject.getString("title"),
                                     responseObject.getString("body"));
-                            courseList.add(note);
+                            courseList.add(course);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show();
                         }
                     }
-                    if (isGuest){
+                    if (isGuest) {
                         adapter = new CourseGuestListRecyclerViewHelper(courseList, context, preferences.getBoolean("isGuest", false));
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
@@ -126,14 +115,14 @@ public class HomeFragment extends Fragment {
         mRequestQueue.add(jsonArrayRequest);
     }
 
-    public void createNoteFloatingActionButton() {
-        createCourseBtn.setOnClickListener(v -> goToCreateNoteActivity());
+    public void createCourseFloatingActionButton() {
+        createCourseBtn.setOnClickListener(v -> goToCreateCourseActivity());
     }
 
 
-    public void goToCreateNoteActivity() {
-        Intent goToCreateNote = new Intent(getActivity(), CreateCourseActivity.class);
-        startActivity(goToCreateNote);
+    public void goToCreateCourseActivity() {
+        Intent goToCreateCourse = new Intent(getActivity(), CreateCourseActivity.class);
+        startActivity(goToCreateCourse);
     }
 
     private void filterFavoriteCourses(JSONArray courses) {
@@ -142,7 +131,7 @@ public class HomeFragment extends Fragment {
             try {
                 JSONObject courseObject = courses.getJSONObject(i);
                 Course course = new Course(
-                        courseObject.getInt("note_id"),
+                        courseObject.getInt("course_id"),
                         courseObject.getString("title"),
                         courseObject.getString("body")
                 );

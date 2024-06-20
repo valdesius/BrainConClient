@@ -52,20 +52,20 @@ public class FavoriteFragment extends Fragment {
     private void loadFavoriteCourses() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                ApiLinksHelper.getMyNotesApiUri(),
+                ApiLinksHelper.getMyCoursesApiUri(),
                 null,
                 response -> {
                     favoriteCourses = new ArrayList<>();
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject responseObject = response.getJSONObject(i);
-                            int noteId = responseObject.getInt("note_id");
+                            int courseId = responseObject.getInt("course_id");
                             String title = responseObject.getString("title");
                             String body = responseObject.getString("body");
-                            boolean isFavorite = preferences.getBoolean("favorite_" + noteId, false);
+                            boolean isFavorite = preferences.getBoolean("favorite_" + courseId, false);
 
                             if (isFavorite) {
-                                Course course = new Course(noteId, title, body);
+                                Course course = new Course(courseId, title, body);
                                 favoriteCourses.add(course);
                             }
                         } catch (JSONException e) {

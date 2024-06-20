@@ -1,6 +1,7 @@
 package com.example.brainconclient;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,44 +34,39 @@ public class CreateCourseActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
 
     private SharedPreferences preferences;
-    private TextView createNoteTitleField, createNoteBodyField;
-    private Button createNoteBtn;
+    private TextView createCourseTitleField, createCourseBodyField;
+    private Button createCourseBtn;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_course);
-        // SET ACTION BAR ATTRIBUTES:
 
         actionBar = getSupportActionBar();
         actionBar.setTitle("Создать курс");
         preferences = getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
 
-        // HOOK / INITIATE VIEW ELEMENTS / COMPONENTS:
-        createNoteTitleField    = findViewById(R.id.create_note_title_field);
-        createNoteBodyField     = findViewById(R.id.create_note_body_field);
-        createNoteBtn           = findViewById(R.id.create_note_btn);
+        createCourseTitleField = findViewById(R.id.create_course_title_field);
+        createCourseBodyField = findViewById(R.id.create_course_body_field);
+        createCourseBtn = findViewById(R.id.create_course_btn);
 
-        // INITIATE REQUEST QUE:
         requestQueue = MyVolleySingletonUtil.getInstance(CreateCourseActivity.this).getRequestQueue();
 
-        createNoteBtn.setOnClickListener(new View.OnClickListener() {
+        createCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // CREATE NOTE METHOD:
-                createNote();
+                createCourse();
             }
         });
-        // END OF CREATE NOTE ON CLICK LISTENER OBJECT.
 
     }
-    // END OF ON CREATE METHOD.
 
-    public void createNote(){
-        String title = createNoteTitleField.getText().toString();
-        String body = createNoteBodyField.getText().toString();
+    public void createCourse() {
+        String title = createCourseTitleField.getText().toString();
+        String body = createCourseBodyField.getText().toString();
 
-        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.createNoteApiUri(), new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.createCourseApiUri(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("CreateCourseActivity", "Created Course!");
@@ -83,8 +79,7 @@ public class CreateCourseActivity extends AppCompatActivity {
                 Log.i("CreateCourseActivity", "Ошибка в создании курса");
 
             }
-            // END OF ON ERROR RESPONSE METHOD.
-        }){
+        }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -93,7 +88,6 @@ public class CreateCourseActivity extends AppCompatActivity {
                 params.put("body", body);
                 return params;
             }
-            // END OF GET PARAMS METHOD.
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -102,21 +96,15 @@ public class CreateCourseActivity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
-            // END OF GET HEADERS METHOD.
         };
-        // END OF STRING REQUEST OBJECT.
 
-        // ADD / SEND REQUEST:
         requestQueue.add(request);
 
     }
-    // END OF CREATE NOTE METHOD.
 
-    public void goToSuccessActivity(){
+    public void goToSuccessActivity() {
         Intent goToSuccess = new Intent(CreateCourseActivity.this, SuccessActivity.class);
         startActivity(goToSuccess);
         finish();
     }
-    // END OF GO TO SUCCESS ACTIVITY METHOD.
 }
-// END OF CREATE NOTE ACTIVITY CLASS.

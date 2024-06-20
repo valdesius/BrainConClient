@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<CourseGuestListRecyclerViewHelper.NoteListViewHolder> {
+public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<CourseGuestListRecyclerViewHelper.CourseListViewHolder> {
     private SharedPreferences preferences;
     private List<Course> courseListItems;
     private Context context;
@@ -45,49 +45,49 @@ public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<Cour
 
     @NonNull
     @Override
-    public NoteListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CourseListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.course_list, parent, false);
 
-        return new NoteListViewHolder(v);
+        return new CourseListViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NoteListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CourseListViewHolder holder, int position) {
         Course course = this.courseListItems.get(position);
-        boolean isFavorite = preferences.getBoolean("favorite_" + course.getNote_id(), false);
+        boolean isFavorite = preferences.getBoolean("favorite_" + course.getCourse_id(), false);
         course.setFavorite(isFavorite);
         boolean isGuest = preferences.getBoolean("isGuest", false);
 
-        holder.noteTitle.setText(course.getTitle());
-        holder.noteBody.setText(course.getBody());
+        holder.courseTitle.setText(course.getTitle());
+        holder.courseBody.setText(course.getBody());
         holder.favoriteButton.setImageResource(isFavorite ? R.drawable.hearred : R.drawable.heart);
 
         if (!isGuest) {
-            holder.noteItemLayout.setOnClickListener(v -> {
+            holder.courseItemLayout.setOnClickListener(v -> {
                 Intent intent = new Intent(context, RegisterActivity.class);
-                intent.putExtra("note_id", String.valueOf(course.getNote_id()));
-                intent.putExtra("note_title", course.getTitle());
-                intent.putExtra("note_body", course.getBody());
+                intent.putExtra("course_id", String.valueOf(course.getCourse_id()));
+                intent.putExtra("course_title", course.getTitle());
+                intent.putExtra("course_body", course.getBody());
                 context.startActivity(intent);
             });
 
             holder.favoriteButton.setOnClickListener(v -> {
                 boolean newFavStatus = !isFavorite;
                 course.setFavorite(newFavStatus);
-                preferences.edit().putBoolean("favorite_" + course.getNote_id(), newFavStatus).apply();
-                updateFavoriteStatusOnServer(course.getNote_id(), newFavStatus);
+                preferences.edit().putBoolean("favorite_" + course.getCourse_id(), newFavStatus).apply();
+                updateFavoriteStatusOnServer(course.getCourse_id(), newFavStatus);
                 notifyItemChanged(position);
             });
         } else {
-            holder.noteItemLayout.setOnClickListener(null);
+            holder.courseItemLayout.setOnClickListener(null);
             holder.favoriteButton.setOnClickListener(null);
 
         }
     }
 
-    private void updateFavoriteStatusOnServer(int noteId, boolean newStatus) {
-        String url = ApiLinksHelper.updateFavorite(noteId, newStatus); // URL должен включать user_id
+    private void updateFavoriteStatusOnServer(int courseId, boolean newStatus) {
+        String url = ApiLinksHelper.updateFavorite(courseId, newStatus); // URL должен включать user_id
 
         StringRequest request = new StringRequest(Request.Method.PUT, url, response -> {
             // Обработка успешного ответа сервера
@@ -102,7 +102,7 @@ public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<Cour
             @Override
             protected Map<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<>();
-                params.put("note_id", String.valueOf(noteId));
+                params.put("course_id", String.valueOf(courseId));
                 params.put("is_favorite", newStatus ? "1" : "0");
                 params.put("user_id", String.valueOf(preferences.getInt("user_id", -1))); // Добавьте user_id в параметры
                 return params;
@@ -128,17 +128,17 @@ public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<Cour
         return courseListItems.size();
     }
 
-    public class NoteListViewHolder extends RecyclerView.ViewHolder{
-        public TextView noteTitle, noteBody;
+    public class CourseListViewHolder extends RecyclerView.ViewHolder{
+        public TextView courseTitle, courseBody;
         public ImageView favoriteButton;
-        private LinearLayout noteItemLayout;
+        private LinearLayout courseItemLayout;
 
-        public NoteListViewHolder(@NonNull View itemView) {
+        public CourseListViewHolder(@NonNull View itemView) {
             super(itemView);
-            noteTitle   = itemView.findViewById(R.id.note_title);
-            noteBody    = itemView.findViewById(R.id.note_body);
+            courseTitle   = itemView.findViewById(R.id.course_title);
+            courseBody    = itemView.findViewById(R.id.course_body);
             favoriteButton = itemView.findViewById(R.id.favorite_btn);
-            noteItemLayout = itemView.findViewById(R.id.noteItemLayout);
+            courseItemLayout = itemView.findViewById(R.id.courseItemLayout);
         }
     }
 }

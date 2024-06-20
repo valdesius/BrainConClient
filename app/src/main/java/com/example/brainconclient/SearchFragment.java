@@ -99,14 +99,14 @@ public class SearchFragment extends Fragment {
         // Создаем запрос на получение всех курсов
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                ApiLinksHelper.getMyNotesApiUri(), // Замените на ваш URL для получения всех курсов
+                ApiLinksHelper.getMyCoursesApiUri(), // Замените на ваш URL для получения всех курсов
                 null,
                 response -> {
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject courseObject = response.getJSONObject(i);
                             Course course = new Course(
-                                    courseObject.getInt("note_id"),
+                                    courseObject.getInt("course_id"),
                                     courseObject.getString("title"),
                                     courseObject.getString("body") // Предполагаем, что у курса есть описание
                             );

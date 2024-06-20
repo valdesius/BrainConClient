@@ -9,38 +9,31 @@ public class ApiLinksHelper {
     public static String updateUserApiUri(){
         return BASE_URL + "auth/updateUser";
     }
-    // END OF AUTHENTICATE USER API URI METHOD.
 
     public static  String registerUserApiUri(){
         return BASE_URL + "auth/register";
     }
-    // END OF REGISTER USER API URI METHOD.
 
-    public static String getMyNotesApiUri(){
-        return BASE_URL + "note/all";
+    public static String getMyCoursesApiUri(){
+        return BASE_URL + "course/all";
     }
-    // END OF GET MY NOTES API URI METHOD.
 
-    public static String createNoteApiUri(){
-        return BASE_URL + "note/create";
+    public static String createCourseApiUri(){
+        return BASE_URL + "course/create";
     }
-    // END OF CREATE NOTES API URI METHOD.
 
-    public static String deleteNoteApiUri(){
-        return BASE_URL + "note/delete";
+    public static String deleteCourseApiUri(){
+        return BASE_URL + "course/delete";
     }
-    // END OF DELETE NOTE API URI METHOD.
 
 
     public static String getMyTestsApiUri(){
         return BASE_URL + "test/my_tests";
     }
-    // END OF GET MY NOTES API URI METHOD.
 
     public static String createTestApiUri(){
         return BASE_URL + "test/create";
     }
-    // END OF CREATE NOTES API URI METHOD.
 
     public static String deleteTestApiUri(){
         return BASE_URL + "test/delete";
@@ -48,24 +41,22 @@ public class ApiLinksHelper {
 
 
     public static String getFavorites() {
-        return BASE_URL + "note/favorites";
+        return BASE_URL + "course/favorites";
     }
 
 
-    public static String updateFavorite(int noteId, boolean newStatus) {
-        return BASE_URL + "note/favorite";
+    public static String updateFavorite(int courseId, boolean newStatus) {
+        return BASE_URL + "course/favorite";
     }
 
 
     public static String createQuestionApiUri(){
         return BASE_URL + "questions/create";
     }
-    // END OF CREATE NOTES API URI METHOD.
 
     public static String deleteQuestionApiUri(){
         return BASE_URL + "questions/delete";
     }
-    // END OF DELETE NOTE API URI METHOD.
 
 
 

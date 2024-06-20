@@ -15,8 +15,8 @@ public class Course {
     private String title;
     private String body;
 
-    public Course(int note_id, String title, String body) {
-        this.course_id = note_id;
+    public Course(int course_id, String title, String body) {
+        this.course_id = course_id;
         this.title = title;
         this.body = body;
     }
@@ -26,12 +26,12 @@ public class Course {
         this.body   = body;
     }
 
-    public int getNote_id() {
+    public int getCourse_id() {
         return course_id;
     }
 
-    public void setNote_id(int note_id) {
-        this.course_id = note_id;
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
     }
 
     public String getTitle() {

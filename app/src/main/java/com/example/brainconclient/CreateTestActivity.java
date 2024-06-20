@@ -57,14 +57,11 @@ public class CreateTestActivity extends AppCompatActivity {
         createTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // CREATE NOTE METHOD:
                 createTest();
             }
         });
-        // END OF CREATE NOTE ON CLICK LISTENER OBJECT.
 
     }
-    // END OF ON CREATE METHOD.
 
     public void createTest(){
         String title = createTestTitleField.getText().toString();
@@ -97,7 +94,6 @@ public class CreateTestActivity extends AppCompatActivity {
                 params.put("answer", answer);
                 return params;
             }
-            // END OF GET PARAMS METHOD.
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -106,19 +102,11 @@ public class CreateTestActivity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
-            // END OF GET HEADERS METHOD.
         };
 
-        // END OF STRING REQUEST OBJECT.
-
-        // ADD / SEND REQUEST:
         requestQueue.add(request);
 
-        Intent intent = new Intent(CreateTestActivity.this, TestDetailActivity.class);
-        intent.putExtra("correct_answer", answer);
-        startActivity(intent);
+
 
     }
-    // END OF CREATE NOTE METHOD.
-
 }

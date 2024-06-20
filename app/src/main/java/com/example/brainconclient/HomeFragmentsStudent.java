@@ -1,5 +1,6 @@
 package com.example.brainconclient;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,13 +45,14 @@ public class HomeFragmentsStudent extends Fragment {
     private RecyclerView recyclerView;
     SharedPreferences preferences;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_student, container, false);
         preferences = getActivity().getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), Context.MODE_PRIVATE);
 
-        recyclerView = view.findViewById(R.id.note_list_recycler_view);
+        recyclerView = view.findViewById(R.id.course_list_recycler_view);
 
         // Получаем статус пользователя (гость или авторизированный)
         boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
@@ -66,24 +68,24 @@ public class HomeFragmentsStudent extends Fragment {
         mRequestQueue = MyVolleySingletonUtil.getInstance(getActivity()).getRequestQueue();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         courseList = new ArrayList<>();
-        getUserNotes(getActivity());
+        getUserCourses(getActivity());
         return view;
     }
-    public void getUserNotes(Context context) {
+    public void getUserCourses(Context context) {
         HashMap<String, String> params = new HashMap<>();
         params.put("token", "email");
         boolean isGuest = getActivity().getIntent().getBooleanExtra("isGuest", false);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyNotesApiUri(), null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyCoursesApiUri(), null,
                 response -> {
                     recyclerView.setVisibility(View.VISIBLE);
                     filterFavoriteCourses(response);
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject responseObject = response.getJSONObject(i);
-                            Course note = new Course(responseObject.getInt("note_id"),
+                            Course course = new Course(responseObject.getInt("course_id"),
                                     responseObject.getString("title"),
                                     responseObject.getString("body"));
-                            courseList.add(note);
+                            courseList.add(course);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -118,9 +120,9 @@ public class HomeFragmentsStudent extends Fragment {
 
 
 
-    public void goToCreateNoteActivity() {
-        Intent goToCreateNote = new Intent(getActivity(), CreateCourseActivity.class);
-        startActivity(goToCreateNote);
+    public void goToCreateCourseActivity() {
+        Intent goToCreateCourse = new Intent(getActivity(), CreateCourseActivity.class);
+        startActivity(goToCreateCourse);
     }
 
     private void filterFavoriteCourses(JSONArray courses) {
@@ -129,7 +131,7 @@ public class HomeFragmentsStudent extends Fragment {
             try {
                 JSONObject courseObject = courses.getJSONObject(i);
                 Course course = new Course(
-                        courseObject.getInt("note_id"),
+                        courseObject.getInt("course_id"),
                         courseObject.getString("title"),
                         courseObject.getString("body")
                 );

@@ -84,24 +84,19 @@ public class TestDetailActivity extends AppCompatActivity {
 
             }
         });
-        // DELETE NOTE ON CLICK LISTENER OBJECT:
         deleteTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("TestDetailActivity", "test id is: " + testId);
                 deleteTest(testId);
             }
-            // END OF ON CLICK METHOD.
         });
 
-
-        // END OF DELETE NOTE ON CLICK LISTENER OBJECT.
     }
     public void goToSuccessActivity(){
         Intent intent = new Intent(TestDetailActivity.this, SuccessTestActivity.class);
         startActivity(intent);
     }
-    // END OF ON CREATE METHOD.
 
     public void deleteTest(String test_Id){
         StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.deleteTestApiUri(), new Response.Listener<String>() {

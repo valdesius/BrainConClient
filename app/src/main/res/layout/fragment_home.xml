@@ -43,7 +43,7 @@ android:layout_marginTop="720dp"
 
         <androidx.recyclerview.widget.RecyclerView
 
-            android:id="@+id/note_list_recycler_view"
+            android:id="@+id/course_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
@@ -51,7 +51,7 @@ android:layout_marginTop="720dp"
     </LinearLayout>
 
     <TextView
-        android:id="@+id/no_notes"
+        android:id="@+id/no_courses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#4A4949"
