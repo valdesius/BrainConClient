@@ -63,8 +63,9 @@
                     android:layout_width="match_parent"
                     android:maxLength="16"
                     android:background="@drawable/rounded_edittext_background"
-
+                    android:textColor="@color/black"
                     android:maxLines="1"
+                    android:textColorHint="@color/black"
                     android:layout_height="wrap_content"
                     android:hint="Имя" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -90,9 +91,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="16"
+                    android:textColor="@color/black"
                     android:background="@drawable/rounded_edittext_background"
 
-
+                    android:textColorHint="@color/black"
                     android:maxLines="1"
                     android:hint="Фамилия" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -110,12 +112,13 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_email"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:background="@drawable/rounded_edittext_background"
 
-
+                    android:textColorHint="@color/black"
                     android:hint="Email" />
 
                 <RadioGroup
@@ -132,11 +135,13 @@
                         android:layout_marginRight="30dp"
                         android:layout_marginLeft="10dp"
                         android:paddingLeft="10dp"
+
                         android:textColor="@drawable/radio_button_text_color_selector"
                         android:text="Ментор" />
 
                     <RadioButton
                         android:paddingLeft="10dp"
+
                         android:id="@+id/studentRadioButton"
                         android:textColor="@drawable/radio_button_text_color_selector"
                         android:layout_width="wrap_content"
@@ -155,6 +160,7 @@
                 android:id="@+id/txt_password_layout"
                 android:layout_width="match_parent"
                 app:errorEnabled="true"
+
                 app:counterTextAppearance="@color/error_color"
                 app:endIconMode="password_toggle"
                 style="@style/NoUnderlineTextInputLayout"
@@ -163,7 +169,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_password"
                     android:background="@drawable/rounded_edittext_background"
-
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -187,6 +194,8 @@
                     android:id="@+id/txt_confirm"
                     android:layout_width="match_parent"
                     android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:layout_height="wrap_content"
                     android:hint="Подтверждение пароля" />
             </com.google.android.material.textfield.TextInputLayout>

@@ -67,19 +67,29 @@
             android:text="Подтвердить"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/update_test_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1e90ff"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:text="Редактировать тест"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/delete_test_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#BC1C1C"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:text="Удалить тест"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
     <!-- End Of Note Detail Wrapper -->
 </ScrollView>
-    <TextView
-        android:id="@+id/delete_test_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:text="Удалить тест"
 
-        android:textSize="18sp"
-        android:textColor="#C34040" />
 
 </RelativeLayout>

@@ -193,14 +193,14 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         // DISPLAY SUCCESS MESSAGE IF AUTHENTICATED:
-        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, "Вход успешен!", Toast.LENGTH_LONG).show();
         finish();
     }
     public void goToMainStudentIfAuthenticated(){
         Intent intent = new Intent(LoginActivity.this, MainActivityStudent.class);
         startActivity(intent);
         // DISPLAY SUCCESS MESSAGE IF AUTHENTICATED:
-        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, "Вход успешен!", Toast.LENGTH_LONG).show();
         finish();
     }
     // END OF GO TO LOGIN INTENT METHOD.

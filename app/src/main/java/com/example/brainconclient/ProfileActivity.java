@@ -132,7 +132,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void logUserOut() {
         clearPreferences();
         goToLogin();
-        Toast.makeText(ProfileActivity.this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ProfileActivity.this, "Вы вышли с аккаунта", Toast.LENGTH_SHORT).show();
     }
     // END OF LOG USER OUT METHOD.
 

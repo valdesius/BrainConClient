@@ -1,21 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#1a1a1a"
+    android:background="#1f1f1f"
     tools:context=".HomeFragment">
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_courses_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-android:layout_marginTop="720dp"
-        android:layout_marginLeft="350dp"
-
-        android:clickable="true"
-        app:srcCompat="@drawable/baseline_add_24" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +13,6 @@ android:layout_marginTop="720dp"
         android:gravity=""
         android:paddingHorizontal="10dp"
         android:background="@drawable/course_list__bg_style"
-
         android:orientation="vertical">
 
         <TextView
@@ -39,10 +27,7 @@ android:layout_marginTop="720dp"
             android:fontFamily="@font/globersemiboldfree"
             android:layout_marginBottom="5dp"/>
 
-
-
         <androidx.recyclerview.widget.RecyclerView
-
             android:id="@+id/course_list_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,21 +43,26 @@ android:layout_marginTop="720dp"
         android:text="В данный момент курсы отсутствуют"
         android:layout_marginLeft="5dp"
         android:elevation="20dp"
-
         android:gravity="center"
         android:visibility="invisible"
         android:layout_centerVertical="true"
         android:textFontWeight="700"
         android:paddingHorizontal="15dp"
-
         android:layout_marginBottom="10dp"
         android:textSize="28sp"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_courses_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/baseline_add_24" />
 
     <!-- Display Logged In Username -->
-
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,6 +70,5 @@ android:layout_marginTop="720dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
     </LinearLayout>
-
 
 </RelativeLayout>

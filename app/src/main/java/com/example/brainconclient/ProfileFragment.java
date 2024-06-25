@@ -92,7 +92,7 @@ public class ProfileFragment extends Fragment {
     public void logUserOut() {
         clearPreferences();
         goToLogin();
-        Toast.makeText(getContext(), "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Вы вышли с аккаунта", Toast.LENGTH_SHORT).show();
     }
     // END OF LOG USER OUT METHOD.
 

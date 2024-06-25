@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -131,7 +132,7 @@ public class CourseGuestListRecyclerViewHelper extends RecyclerView.Adapter<Cour
     public class CourseListViewHolder extends RecyclerView.ViewHolder{
         public TextView courseTitle, courseBody;
         public ImageView favoriteButton;
-        private LinearLayout courseItemLayout;
+        private ConstraintLayout courseItemLayout;
 
         public CourseListViewHolder(@NonNull View itemView) {
             super(itemView);

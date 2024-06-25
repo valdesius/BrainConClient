@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isGuest = getIntent().getBooleanExtra("isGuest", false);
         prefs = getSharedPreferences("YourPrefsName", Context.MODE_PRIVATE);
         isLoggedIn = prefs.getBoolean("isLoggedIn", false);
-
+        getSupportActionBar().hide();
         if (!isLoggedIn) {
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); // Clear all previous activities

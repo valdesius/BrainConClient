@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -61,7 +62,9 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
         boolean isFavorite = preferences.getBoolean("favorite_" + course.getCourse_id(), false);
         course.setFavorite(isFavorite);
         boolean isGuest = preferences.getBoolean("isGuest", false);
-
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("course_id", course.getCourse_id());
+        editor.apply();
         holder.courseTitle.setText(course.getTitle());
         holder.courseBody.setText(course.getBody());
         holder.favoriteButton.setImageResource(isFavorite ? R.drawable.hearred : R.drawable.heart);
@@ -134,7 +137,7 @@ public class CourseListRecyclerViewHelper extends RecyclerView.Adapter<CourseLis
     public class CourseListViewHolder extends RecyclerView.ViewHolder{
         public TextView courseTitle, courseBody;
         public ImageView favoriteButton;
-        private LinearLayout courseItemLayout;
+        private ConstraintLayout courseItemLayout;
 
         public CourseListViewHolder(@NonNull View itemView) {
             super(itemView);

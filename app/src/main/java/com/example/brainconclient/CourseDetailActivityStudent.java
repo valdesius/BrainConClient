@@ -75,7 +75,7 @@ public class CourseDetailActivityStudent extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(CourseDetailActivityStudent.this));
         testList = new ArrayList<>();
         createCommentFloatingActionButton();
-        getUserTests();
+//        getUserTests();
 
         createCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,60 +142,60 @@ public class CourseDetailActivityStudent extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    public void getUserTests() {
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("token", "email");
-
-        JsonArrayRequest jsonArrayRequest
-                = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyTestsApiUri(), null, new Response.Listener<JSONArray>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onResponse(JSONArray response) {
-                recyclerView.setVisibility(View.VISIBLE);
-
-                for (int i = 0; i < response.length(); i++) {
-
-                    try {
-                        JSONObject responseObject = response.getJSONObject(i);
-                        Test test
-                                = new Test(responseObject.getInt("test_id"),
-                                responseObject.getString("title"),
-                                responseObject.getString("body"),
-                                responseObject.getString("question"),
-                                responseObject.getString("answer"));
-                        testList.add(test);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(CourseDetailActivityStudent.this, "Something went wrong", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                adapter = new TestListRecyclerViewHelper(testList, CourseDetailActivityStudent.this);
-
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Log.i("MainActivity", error.toString());
-                Toast.makeText(CourseDetailActivityStudent.this, "Не удалось получить список курсов", Toast.LENGTH_LONG).show();
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                String token = preferences.getString("token", "");
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + token);
-                headers.put("content-type", "application/json");
-                return headers;
-            }
-        };
-        mRequestQueue.add(jsonArrayRequest);
-    }
+//    public void getUserTests() {
+//        HashMap<String, String> params = new HashMap<String, String>();
+//        params.put("token", "email");
+//
+//        JsonArrayRequest jsonArrayRequest
+//                = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyTestsApiUri(), null, new Response.Listener<JSONArray>() {
+//            @SuppressLint("NotifyDataSetChanged")
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                recyclerView.setVisibility(View.VISIBLE);
+//
+//                for (int i = 0; i < response.length(); i++) {
+//
+//                    try {
+//                        JSONObject responseObject = response.getJSONObject(i);
+//                        Test test
+//                                = new Test(responseObject.getInt("test_id"),
+//                                responseObject.getString("title"),
+//                                responseObject.getString("body"),
+//                                responseObject.getString("question"),
+//                                responseObject.getString("answer"));
+//                        testList.add(test);
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                        Toast.makeText(CourseDetailActivityStudent.this, "Something went wrong", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//
+//                adapter = new TestListRecyclerViewHelper(testList, CourseDetailActivityStudent.this);
+//
+//                recyclerView.setAdapter(adapter);
+//                adapter.notifyDataSetChanged();
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                error.printStackTrace();
+//                Log.i("MainActivity", error.toString());
+//                Toast.makeText(CourseDetailActivityStudent.this, "Не удалось получить список курсов", Toast.LENGTH_LONG).show();
+//            }
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                String token = preferences.getString("token", "");
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("Authorization", "Bearer " + token);
+//                headers.put("content-type", "application/json");
+//                return headers;
+//            }
+//        };
+//        mRequestQueue.add(jsonArrayRequest);
+//    }
 
     public void goToSuccessActivity() {
         Intent goToSuccess = new Intent(CourseDetailActivityStudent.this, SuccessActivity.class);

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1f1f1f"
+    android:padding="15dp"
+
+    tools:context=".CreateTestActivity">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="20sp"
+    android:paddingBottom="10dp"
+    android:text="Редактировать название теста"
+    android:textColor="@color/white"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Название теста"
+        style="@style/NoUnderlineTextInputLayout"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/update_test_title_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_edittext_background"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <!-- End Of Title Text Field -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:paddingBottom="10dp"
+        android:text="Редактировать описание теста"
+        android:textColor="@color/white"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Описание"
+        android:layout_marginBottom="10dp"
+        style="@style/NoUnderlineTextInputLayout"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/update_test_body_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_edittext_background"
+            android:gravity="top"
+            android:lines="7"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <!-- End Of Body Text Field -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:paddingBottom="10dp"
+        android:text="Редактировать вопрос"
+        android:textColor="@color/white"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Вопрос"
+        style="@style/NoUnderlineTextInputLayout"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/update_test_question_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_edittext_background"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Редактировать ответ"
+        android:textColor="@color/white"
+        android:paddingBottom="10dp"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ответ"
+        style="@style/NoUnderlineTextInputLayout"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/update_test_answer_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:paddingTop="25dp"
+            android:background="@drawable/rounded_edittext_background"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/update_test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:backgroundTint="#1e90ff"
+        android:paddingVertical="18dp"
+        android:text="Сохранить изменения"
+        android:textAllCaps="false" />
+
+
+</LinearLayout>

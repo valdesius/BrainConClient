@@ -54,13 +54,14 @@ public class CourseDetailActivity extends AppCompatActivity {
 
 
     private RequestQueue requestQueue;
-    private TextView deleteCourseBtn;
+    private Button deleteCourseBtn, updateCourseBtn;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
+        getSupportActionBar().hide();
 
         preferences = getSharedPreferences(StringResourceHelper.getUserDetailPrefName(), MODE_PRIVATE);
 
@@ -73,6 +74,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         createTestBtn = findViewById(R.id.create_test_btn);
         createCommentBtn = findViewById(R.id.create_comment_btn);
 
+        updateCourseBtn = findViewById(R.id.update_course_btn);
         String courseId = getIntent().getStringExtra("course_id");
         String courseTitle = getIntent().getStringExtra("course_title");
         String courseBody = getIntent().getStringExtra("course_body");
@@ -106,6 +108,19 @@ public class CourseDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        updateCourseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CourseDetailActivity.this, CourseSettingsActivity.class);
+                intent.putExtra("course_id", courseId);
+                intent.putExtra("course_title", courseTitle);
+                intent.putExtra("course_body", courseBody);
+                startActivity(intent);
+            }
+        });
+
+
         deleteCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,9 +172,9 @@ public class CourseDetailActivity extends AppCompatActivity {
     public void getUserTests() {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("token", "email");
-
+        String courseId = getIntent().getStringExtra("course_id");
         JsonArrayRequest jsonArrayRequest
-                = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyTestsApiUri(), null, new Response.Listener<JSONArray>() {
+                = new JsonArrayRequest(Request.Method.GET, ApiLinksHelper.getMyTestsApiUri(Integer.parseInt(courseId)), null, new Response.Listener<JSONArray>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(JSONArray response) {
@@ -174,7 +189,8 @@ public class CourseDetailActivity extends AppCompatActivity {
                                 responseObject.getString("title"),
                                 responseObject.getString("body"),
                                 responseObject.getString("question"),
-                                responseObject.getString("answer"));
+                                responseObject.getString("answer"))
+                        ;
                         testList.add(test);
 
                     } catch (JSONException e) {
@@ -226,6 +242,8 @@ public class CourseDetailActivity extends AppCompatActivity {
 
     public void goToCreateTestActivity() {
         Intent goToCreateCourse = new Intent(CourseDetailActivity.this, CreateTestActivity.class);
+        String courseId = getIntent().getStringExtra("course_id");
+        goToCreateCourse.putExtra("course_id", courseId);
         startActivity(goToCreateCourse);
     }
 

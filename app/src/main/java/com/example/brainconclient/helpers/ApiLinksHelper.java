@@ -1,7 +1,7 @@
 package com.example.brainconclient.helpers;
 
 public class ApiLinksHelper {
-    private static final String BASE_URL = "http://192.168.0.35:8080/api/v1/";
+    private static final String BASE_URL = "http://158.160.168.98:8080/api/v1/";
 
     public static String authUserApiUri(){
         return BASE_URL + "auth/authenticate";
@@ -26,9 +26,13 @@ public class ApiLinksHelper {
         return BASE_URL + "course/delete";
     }
 
+    public static String updateCourseApiUri(){
+        return BASE_URL + "course/update";
+    }
 
-    public static String getMyTestsApiUri(){
-        return BASE_URL + "test/my_tests";
+
+    public static String getMyTestsApiUri(int courseId){
+        return BASE_URL + "course/" + courseId + "/tests";
     }
 
     public static String createTestApiUri(){

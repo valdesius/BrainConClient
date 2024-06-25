@@ -33,6 +33,7 @@
         android:layout_height="48dp"
         android:backgroundTint="#1e90ff"
         android:text="Загрузка"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"/>
 
 

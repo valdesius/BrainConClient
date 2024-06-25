@@ -57,7 +57,18 @@ public class CreateTestActivity extends AppCompatActivity {
         createTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = getIntent();
+                String course_id = intent.getStringExtra("course_id");
+
+                if(course_id == null) {
+                    Toast.makeText(CreateTestActivity.this, "Course ID is missing", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 createTest();
+
+                Intent newIntent = new Intent(CreateTestActivity.this, CourseDetailActivity.class);
+                newIntent.putExtra("course_id", course_id);
             }
         });
 
@@ -68,6 +79,7 @@ public class CreateTestActivity extends AppCompatActivity {
         String body = createTestBodyField.getText().toString();
         String question = createTestQuestionField.getText().toString();
         String answer = createTestAnswerField.getText().toString();
+        String course_id= getIntent().getStringExtra("course_id");
 
         StringRequest request = new StringRequest(Request.Method.POST, ApiLinksHelper.createTestApiUri(), new Response.Listener<String>() {
             @Override
@@ -92,6 +104,7 @@ public class CreateTestActivity extends AppCompatActivity {
                 params.put("body", body);
                 params.put("question", question);
                 params.put("answer", answer);
+                params.put("course_id", course_id);
                 return params;
             }
 
