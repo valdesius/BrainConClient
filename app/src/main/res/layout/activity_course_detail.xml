@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1f1f1f"
+    android:orientation="vertical"
+
+
+    tools:context=".CourseDetailActivity">
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_comment_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/baseline_add_comment_24" />
+    <!-- Note Detail Wrapper -->
+    <LinearLayout
+        android:id="@+id/to_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:gravity=""
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/course_list__bg_style"
+
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/course_dtl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="43sp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/course_dtl_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:text=""
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/create_test_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1e90ff"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:paddingLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp"
+            android:text="Создать тест"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/update_course_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1e90ff"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:paddingLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp"
+            android:text="Редактировать курс"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/delete_course_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#BC1C1C"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:paddingLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp"
+            android:text="Удалить курс"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"/>
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/test_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+    <!-- End Of Note Detail Wrapper -->
+
+
+
+</RelativeLayout>

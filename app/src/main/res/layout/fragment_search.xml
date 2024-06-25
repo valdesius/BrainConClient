@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1f1f1f">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/course_list__bg_style"
+        android:gravity=""
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/test_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/globersemiboldfree"
+            android:text="Поиск курсов"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="43sp" />
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_edittextser_background"
+            android:hint="Введите курс"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textColorHint="#c1c1c1"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_results_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/search_edit_text"
+            android:clipToPadding="false"
+            android:padding="0dp"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

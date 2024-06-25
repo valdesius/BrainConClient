@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#7CB2F2"
+    android:background="#1a1a1a"
     android:orientation="vertical"
     tools:context=".SplashScreenActivity">
 
@@ -15,10 +15,10 @@
     <!-- End Of Image: Splash Screen Logo -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="81dp"
-        android:layout_height="wrap_content"
+        android:layout_width="298dp"
+        android:layout_height="234dp"
         android:layout_marginBottom="13dp"
-        app:srcCompat="@drawable/teacher" />
+        app:srcCompat="@drawable/splashfor" />
 
     <ImageView
         android:id="@+id/braincontitile"
@@ -27,6 +27,14 @@
         android:layout_height="52dp"
         android:layout_marginBottom="132dp"
         app:srcCompat="@drawable/braincontitle" />
+
+    <Button
+        android:layout_width="321dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#1e90ff"
+        android:text="Загрузка"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"/>
 
 
 </LinearLayout>
